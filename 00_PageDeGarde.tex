@@ -1,0 +1,38 @@
+% page-de-garde.tex
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    % Sous-titre "Dossier projet"
+    {\fontsize{28}{34}\selectfont\bfseries\color{accenttwo} Dossier projet}
+    
+    \vspace{5cm}
+    
+    % Logo + titre sur la même ligne avec meilleur espacement
+    \noindent
+    \begin{minipage}[c]{0.15\textwidth}
+    \centering
+    \IfFileExists{./Logo/logo.png}{%
+        \includegraphics[width=100pt]{./Logo/logo.png}%
+    }{%
+        \fbox{\parbox{100pt}{\centering\vspace{25pt}LOGO\vspace{25pt}}}%
+    }%
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{0.85\textwidth}
+    \centering
+    {\fontsize{36}{43}\selectfont\bfseries\color{accent} 
+    \makebox[\textwidth][c]{GeoChallenge Tracker}}
+    \end{minipage}
+
+    \vspace{6cm}
+
+    % Auteur en bas à droite
+    \begin{flushright}
+    {\fontsize{22}{26}\selectfont Jean Ceugniet}
+    \end{flushright}
+    
+    \vspace{2cm}
+    
+    \end{titlepage}
+    \clearpage

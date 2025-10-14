@@ -1,0 +1,124 @@
+{
+  "tasks": [
+    {
+      "id": "68a89777bbd8dff27e24346c",
+      "order": 0,
+      "title": "444 caches avec l’attribut picnic",
+      "expression": {
+        "kind": "and",
+        "nodes": [
+          {
+            "kind": "attributes",
+            "attributes": [
+              {
+                "cache_attribute_doc_id": null,
+                "cache_attribute_id": null,
+                "code": "picnic",
+                "is_positive": true
+              }
+            ]
+          }
+        ]
+      },
+      "constraints": {
+        "min_count": 444
+      },
+      "status": "todo",
+      "metrics": {},
+      "progress": null,
+      "start_found_at": null,
+      "completed_at": null,
+      "last_evaluated_at": "2025-08-26T15:11:28.161000",
+      "updated_at": "2025-08-28T08:31:10.075000",
+      "created_at": "2025-08-22T16:14:47.686000"
+    },
+    {
+      "id": "68a89777bbd8dff27e24346d",
+      "order": 1,
+      "title": "4 caches publiées en 2004",
+      "expression": {
+        "kind": "and",
+        "nodes": [
+          {
+            "kind": "placed_year",
+            "year": 2004
+          }
+        ]
+      },
+      "constraints": {
+        "min_count": 4
+      },
+      "status": "done",
+      "metrics": {},
+      "progress": null,
+      "start_found_at": null,
+      "completed_at": null,
+      "last_evaluated_at": "2025-08-26T15:11:28.603000",
+      "updated_at": "2025-08-28T08:31:10.075000",
+      "created_at": "2025-08-22T16:14:47.686000"
+    },
+    {
+      "id": "68a89777bbd8dff27e24346e",
+      "order": 2,
+      "title": "44 caches de type wherigo",
+      "expression": {
+        "kind": "and",
+        "nodes": [
+          {
+            "kind": "type_in",
+            "types": [
+              {
+                "cache_type_doc_id": null,
+                "cache_type_id": null,
+                "cache_type_code": "wherigo"
+              }
+            ]
+          }
+        ]
+      },
+      "constraints": {
+        "min_count": 44
+      },
+      "status": "todo",
+      "metrics": {},
+      "progress": null,
+      "start_found_at": null,
+      "completed_at": null,
+      "last_evaluated_at": "2025-08-26T15:11:29.046000",
+      "updated_at": "2025-08-28T08:31:10.075000",
+      "created_at": "2025-08-22T16:14:47.686000"
+    },
+    {
+      "id": "68a89777bbd8dff27e24346f",
+      "order": 3,
+      "title": "44 caches avec l’attribut challenge",
+      "expression": {
+        "kind": "and",
+        "nodes": [
+          {
+            "kind": "attributes",
+            "attributes": [
+              {
+                "cache_attribute_doc_id": null,
+                "cache_attribute_id": null,
+                "code": "challenge",
+                "is_positive": true
+              }
+            ]
+          }
+        ]
+      },
+      "constraints": {
+        "min_count": 44
+      },
+      "status": "done",
+      "metrics": {},
+      "progress": null,
+      "start_found_at": null,
+      "completed_at": null,
+      "last_evaluated_at": "2025-08-26T15:11:29.329000",
+      "updated_at": "2025-08-28T08:31:10.075000",
+      "created_at": "2025-08-22T16:14:47.686000"
+    }
+  ]
+}

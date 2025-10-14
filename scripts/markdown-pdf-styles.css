@@ -1,0 +1,132 @@
+/* style.css */
+
+/* Style de la page */
+@page {
+    margin: 1cm 1cm 1cm 1cm;
+    size: A4;
+}
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #333;
+    margin: 0 auto;
+    max-width: 800px;
+}
+/* Styles pour la table des matières */
+.table-of-contents {
+    page-break-after: always;
+    margin-bottom: 2em;
+}
+
+.table-of-contents h1 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.3em;
+}
+
+.table-of-contents ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.table-of-contents li {
+    margin: 0.3em 0;
+    padding-left: 1.5em;
+    text-indent: -1.5em;
+}
+
+.table-of-contents a {
+    text-decoration: none;
+    color: #333;
+}
+
+.table-of-contents .toc-level-1 {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: 1em;
+}
+
+.table-of-contents .toc-level-2 {
+    padding-left: 2em;
+}
+
+.table-of-contents .toc-level-3 {
+    padding-left: 3em;
+    font-size: 0.9em;
+}
+
+/* Titres */
+h1 {
+    color: #0056b3;
+    font-size: 20pt;
+    border-bottom: 2pt solid #0056b3;
+    padding-bottom: 6pt;
+}
+* + h1 {
+    margin-top: 24pt;
+}
+
+h2 {
+    color: #2c3e50;
+    font-size: 16pt;
+    border-left: 4pt solid #3498db;
+    padding-left: 10pt;
+}
+* + h2 {
+    margin-top: 20pt;
+}
+/* Code */
+code {
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+}
+
+pre code {
+    display: block;
+    padding: 10px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+}
+
+/* Images (vos diagrammes Mermaid) */
+img {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Md to pdf stylesheet */
+/*
+    // Forcer un saut AVANT l'élément
+    .page-break-before {
+        page-break-before: always !important;
+        break-before: page !important;
+    }
+
+    // Forcer un saut APRÈS l'élément
+    .page-break-after {
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+
+    .no-break, .keep-together {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    .mermaid {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    // Éviter de séparer titre et contenu
+    h1, h2, h3 {
+        page-break-after: avoid;
+        break-after: avoid;
+    }
+*/

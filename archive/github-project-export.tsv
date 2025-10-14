@@ -1,0 +1,93 @@
+Title	URL	Assignees	Status	Target date	Start date
+01 - Rédiger l’expression du besoin	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/3	MarvinLeRouge	Done	Jul 4, 2025	Jul 3, 2025
+02 - Définir les personas utilisateurs	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/4	MarvinLeRouge	Done	Jul 4, 2025	Jul 4, 2025
+03 - Lister les compétences mobilisées	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/5	MarvinLeRouge	Done	Jul 4, 2025	Jul 3, 2025
+04 - Compiler le cahier des charges	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/6	MarvinLeRouge	Done	Jul 4, 2025	Jul 4, 2025
+05 - Soumettre cahier des charges pour révision	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/7	MarvinLeRouge	Done	Jul 4, 2025	Jul 4, 2025
+06 - Générer la version PDF formelle du cahier des charges	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/8	MarvinLeRouge	Done	Jul 5, 2025	Jul 5, 2025
+01 - Créer un compte Railway	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/9	MarvinLeRouge	Done	Jul 5, 2025	Jul 5, 2025
+02 - Variables d'environnement	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/10	MarvinLeRouge	Done	Jul 5, 2025	Jul 5, 2025
+03 - Gitignore	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/11	MarvinLeRouge	Done	Jul 5, 2025	Jul 5, 2025
+04 - Mettre en place le Dockerfile backend	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/13		Done	Jul 7, 2025	Jul 5, 2025
+05 - Mettre en place le Dockerfile frontend	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/14	MarvinLeRouge	Done	Jul 7, 2025	Jul 5, 2025
+06 - Créer un docker-compose.yml minimal	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/15		Done	Jul 7, 2025	Jul 5, 2025
+07 - Vérifier que les conteneurs communiquent	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/16	MarvinLeRouge	Done	Jul 7, 2025	Jul 5, 2025
+08 - Mettre en place un projet uv pour le back	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/12	MarvinLeRouge	Done	Jul 5, 2025	Jul 5, 2025
+Backend : Test connectivité MongoDB	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/91	MarvinLeRouge	Done		
+Backend : healthcheck	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/90	MarvinLeRouge	Done		
+Frontend : test connecivité	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/92	MarvinLeRouge	Done		
+01 - Définition des caractéristiques graphiques globales	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/17	MarvinLeRouge			
+02 - Choix de fonte	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/18	MarvinLeRouge			
+03 - Choix de palette de couleurs	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/19	MarvinLeRouge			
+04 - Définition parcours utilisateurs	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/21	MarvinLeRouge			
+05 - Structure des pages	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/22	MarvinLeRouge			
+06 - Réaliser les wireframes sur Figma	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/23	MarvinLeRouge			
+07 - Simuler les principales interactions	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/24	MarvinLeRouge			
+08 - Organiser les assets dans Figma	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/26	MarvinLeRouge			
+09 - Exporter les maquettes	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/25	MarvinLeRouge			
+4 - Wireframes sur Figma	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/20	MarvinLeRouge	Done		
+01 - Définir les entités principales du projet	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/27	MarvinLeRouge	Done	Jul 10, 2025	Jul 11, 2025
+02 - Identifier les relations entre collections	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/28	MarvinLeRouge	Done	Jul 10, 2025	Jul 11, 2025
+03 - Établir le schéma de chaque collection	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/29	MarvinLeRouge	Done	Jul 26, 2025	Jul 11, 2025
+04 - Prévoir les indexes/relations nécessaires	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/30	MarvinLeRouge	Done	Jul 26, 2025	Jul 11, 2025
+05 - Écrire un script de seeding minimal	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/31	MarvinLeRouge	Done	Jul 26, 2025	Jul 11, 2025
+06 - Documenter la structure	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/32	MarvinLeRouge	Done	Jul 11, 2025	Jul 26, 2025
+07 - Valider la structure	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/33	MarvinLeRouge	Done	Jul 26, 2025	Jul 11, 2025
+01 - Initialiser la structure de tests	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/34	MarvinLeRouge	Done	Aug 1, 2025	Aug 6, 2025
+02 - Écrire un test de santé pour l'API	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/35	MarvinLeRouge	Done	Aug 5, 2025	Aug 6, 2025
+03 - Tester la création d’un utilisateur	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/36	MarvinLeRouge	Done	Aug 7, 2025	Aug 5, 2025
+04 - Tester l’import d’un fichier GPX valide	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/37	MarvinLeRouge	Done	Aug 8, 2025	Aug 8, 2025
+05 - Écrire des tests de règles de challenge	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/38	MarvinLeRouge	Done	Aug 15, 2025	Aug 10, 2025
+06 - Ajouter tests pour les routes sécurisées	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/39	MarvinLeRouge	Done	Aug 22, 2025	Aug 10, 2025
+Tests auth	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/98		Done		
+Tests challenges	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/100		Done		
+01 - Créer le modèle User	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/41	MarvinLeRouge	Done	Jul 25, 2025	Jul 22, 2025
+02 - Implémenter la route d’inscription	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/42	MarvinLeRouge	Done	Jul 29, 2025	Jul 25, 2025
+03 - Implémenter la route de login	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/43	MarvinLeRouge	Done	Jul 30, 2025	Aug 28, 2025
+04 - Implémenter la route d’import de GPX	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/44	MarvinLeRouge	Done	Aug 4, 2025	Aug 5, 2025
+05 - Implémenter la logique de parsing des caches	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/45	MarvinLeRouge	Done	Aug 8, 2025	Aug 5, 2025
+06 - Créer les routes de gestion des challenge	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/46	MarvinLeRouge	Done	Aug 15, 2025	Aug 11, 2025
+07 - Implémenter la logique de task simple	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/47	MarvinLeRouge	Done	Aug 15, 2025	Aug 11, 2025
+08 - Implémenter le calcul de progress	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/48	MarvinLeRouge	Done	Aug 22, 2025	Aug 18, 2025
+09 - Créer la route de suggestion de targets	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/49	MarvinLeRouge	Done	Aug 18, 2025	Aug 22, 2025
+10 - Générer la projection temporelle (baseline)	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/50	MarvinLeRouge	Done	Aug 29, 2025	Aug 25, 2025
+11 - Protéger toutes les routes sensibles par token	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/51	MarvinLeRouge	Done	Aug 29, 2025	Jul 22, 2025
+12 - Documenter l’API avec OpenAPI/Swagger	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/52	MarvinLeRouge	Done	Aug 29, 2025	Jul 22, 2025
+Tests caches	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/99		Done		
+01 - Initialiser le projet Vue.js	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/59	MarvinLeRouge		Sep 3, 2025	Aug 10, 2025
+02 -  Implémenter la navigation	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/61	MarvinLeRouge		Sep 5, 2025	Aug 10, 2025
+03 - Implémenter le layout global responsive	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/62	MarvinLeRouge		Sep 8, 2025	Aug 10, 2025
+04 - Créer le composant de formulaire de connexion	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/60	MarvinLeRouge		Sep 9, 2025	
+05 - Créer le composant d’import GPX	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/63	MarvinLeRouge		Sep 10, 2025	Aug 10, 2025
+06 - Créer le composant de définition d'un challenge	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/64	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+07 - Créer le composant liste des challenges de l’utilisateur	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/65	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+08 - Créer le composant détails d'un challenge d'un utilisateur	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/66	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+09 - Créer le(s) composant(s) pour les graphiques de progression	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/67	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+10 - Composant OpenStreetMap	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/68	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+11 - Composant filtrage map	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/69	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+12 - Prévoir l’internationalisation future	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/70	MarvinLeRouge			
+01 - Installer et configurer l'outil de tests E2E	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/53	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+02 - Écrire un test de connexion utilisateur	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/54	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+03 - Écrire un test de navigation	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/55	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+04 - Tester l’import de fichier GPX via l’interface	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/56	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+05 - Tester l’affichage des challenges	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/57	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+06 - Vérifier le rendu de la carte OSM	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/58	MarvinLeRouge		Sep 12, 2025	Aug 10, 2025
+01 - Finaliser les Dockerfile (front et back)	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/71	MarvinLeRouge		Sep 12, 2025	Jul 3, 2025
+02 - Finaliser le docker-compose.yml complet	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/72	MarvinLeRouge		Sep 12, 2025	Jul 3, 2025
+03 - Configurer le déploiement sur Railway	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/73	MarvinLeRouge		Sep 12, 2025	Jul 3, 2025
+04 - Vérifier l’exécution end-to-end sur serveur distant	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/74	MarvinLeRouge		Sep 12, 2025	Jul 3, 2025
+05 - Rédiger un README.md clair et complet	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/75	MarvinLeRouge		Sep 12, 2025	Jul 3, 2025
+06 - Rédiger une doc technique (API + architecture)	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/76	MarvinLeRouge		Sep 12, 2025	Jul 3, 2025
+07 - Créer un mini-guide utilisateur	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/77	MarvinLeRouge		Sep 12, 2025	Jul 3, 2025
+08 - Ajouter une politique de sécurité minimale	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/78	MarvinLeRouge		Sep 12, 2025	Jul 3, 2025
+Finaliser le docker backend	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/101			Aug 29, 2025	
+01 - Désactiver les modules inachevés (si besoin)	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/79	MarvinLeRouge		Sep 12, 2025	
+02 - Corriger les bugs bloquants (UX, navigation, sécurité)	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/80	MarvinLeRouge		Sep 12, 2025	
+03 - Geler la version sur main	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/81	MarvinLeRouge		Sep 12, 2025	
+04 - Vérifier manuellement les parcours utilisateur	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/82	MarvinLeRouge		Sep 12, 2025	
+05 - Relire toute la documentation	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/83	MarvinLeRouge		Sep 12, 2025	
+06 - Compiler tous les livrables (PDF, code, doc)	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/84	MarvinLeRouge		Sep 12, 2025	
+07 - Préparer une capture ou vidéo de démo	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/85	MarvinLeRouge		Sep 12, 2025	
+08 - Créer un support de présentation	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/86	MarvinLeRouge		Sep 12, 2025	
+09 - Relire les compétences mobilisées une dernière fois	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/87	MarvinLeRouge		Sep 12, 2025	
+10 - Archiver le projet et les livrables	https://github.com/2024-avril-devops-alt-dist/GeoChallenge-Tracker/issues/88	MarvinLeRouge		Sep 12, 2025	

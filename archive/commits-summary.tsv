@@ -1,0 +1,851 @@
+HASH	DATE	AUTHOR	BRANCH	MESSAGE
+fc9deb5a1eb8e46482ef6a0477737276498e035f	2025-09-26 16:42:37 +0200	Jean Ceugniet	frontend/ci-setup-basic	test(unit): add initial Vitest coverage for utils
+and auth mappers
+
+Added src/utils/http.spec.ts to validate FastAPI error parsing (getDetail, detailToText)
+
+Added src/utils/caches.spec.ts to cover cache helpers (coalesce total)
+
+Added src/utils/auth.spec.ts to ensure mapProfileBase maps API _id → id
+
+Configured Vitest coverage with v8 provider
+
+Reorganized mapProfileBase into utils/ to separate executable code from types/
+29e689c2b9b67d851d0e106d15b34c112a7b7d2a	2025-09-26 14:36:49 +0200	Jean Ceugniet	frontend/ci-setup-basic	chore(frontend): lint & typecheck cleanup
+across the app
+
+Adopt ESLint v9 flat config (eslint.config.js) and remove legacy .eslintrc.*
+
+Align rules: no-explicit-any, no-irregular-whitespace, node globals for config files
+
+Replace remaining any with proper types/guards (unknown + type guards)
+
+Add domain types: UserLocation, ProfileBase/ProfileBaseApi → mapProfileBase, Cache*, ChallengeSyncStats
+
+Normalize Axios error handling (isAxiosError, safe detail extraction)
+
+Fix Axios headers typing (use AxiosHeaders + helper) and request auth header injection
+
+Update tsconfig: moduleResolution: "Bundler" (+ ES2021 target/lib for replaceAll)
+
+Router typing: explicit RouteLocationNormalizedLoaded in props callbacks
+
+MapBase: clean recenter logic (watch on user.location/props.center, no premature trigger)
+
+Minor fixes: optional latitude/longitude aliases, counters coalescing, lint autofixes
+
+Refs: lint, types, router, axios, map, tsconfig
+a6c0868b650222626fb283c1bd09984c0c2f2b14	2025-09-26 13:36:15 +0200	Jean Ceugniet	backend/auth	feat(api): ajouter /my/profile pour récupérer le
+profil utilisateur courant
+
+- Nouvelle route GET /my/profile
+- Retourne les infos du user authentifié (id, username, email, rôle, location, updated_at, etc.)
+- Utilise l’auth JWT existante et les dépendances de sécurité
+- Tests fonctionnalité + tests linters + doc OpenAPI mise à jour
+a81a127391b9e79282639ae0305330ee091f0bd2	2025-09-26 12:27:29 +0200	Jean Ceugniet	unknown	On frontend/ci-setup-basic: WIP frontend/ci-setup-basic avant passage sur backend/ci-setup-basic untracked
+25851fca866c2d5bb0216f28446c476f790d10cc	2025-09-26 12:27:29 +0200	Jean Ceugniet	unknown	index on frontend/ci-setup-basic: f0de833 chore: align codebase with linters and type checkers
+856c26ec1c949074968ad2ec7072dfd6ac9f4337	2025-09-26 12:27:29 +0200	Jean Ceugniet	unknown	untracked files on frontend/ci-setup-basic: f0de833 chore: align codebase with linters and type checkers
+f0de833998a6e7224a10384e6744fe14594155a0	2025-09-25 22:39:14 +0200	Jean Ceugniet	backend/auth	chore: align codebase with linters and
+type checkers
+
+- Fix argument ordering in route functions to satisfy Python syntax rules
+- Cast PyObjectId to bson.ObjectId where required for MongoDB operations
+- Add explicit type checks and conversions to silence mypy arg-type errors
+- Use FastAPI dependency injection (`Depends`) correctly for role restrictions
+- Remove manual calls to security helpers in favor of dependency injection
+- General cleanup to keep code consistent with ruff, black, and mypy expectations
+b27cf2b98c38d55b15e16a7f57a80d316ca15dc8	2025-09-24 22:10:20 +0200	Jean Ceugniet	backend/auth	chore(lint): fix style and typing issues flagged
+by ruff, black, and mypy
+9193a12e38f2a181732f5eb392124e6076386b6d	2025-09-20 17:13:53 +0200	Jean Ceugniet	backend/auth	feat(ui/map): ajout sélection « within-bbox »
+(2 clics + aperçu)
+
+- Intègre le crosshair picker pour une sélection en 2 clics : coin A puis coin B
+- Aperçu live du rectangle pendant le déplacement (mousemove)
+- Calcul et affichage de la bbox en DM (N/S, E/W ddd° mm.xyz') + compteur à la suite
+- Bouton Rechercher activé uniquement quand la bbox est complète
+- Appel GET /caches/within-bbox avec params {min_lat, min_lon, max_lat, max_lon}
+- Nettoyage UI: compatibilité FAB (z-index via z-[1101]) et padding droit de la barre
+6047528430a1d6339c6036378d70c5ba156b03f6	2025-09-20 16:20:10 +0200	Jean Ceugniet	backend/auth	feat(ui/map): ajout sélecteur de spot par
+crosshair + intégration FAB
+
+- Ajout du mode "pick" avec curseur crosshair et réticule centré
+- Activation via bouton externe ou méthode exposée (enablePick)
+- Emission d’un event `pick` avec lat/lng vers le parent
+- Affichage des coordonnées formatées (N/S, E/W ddd° mm.xyz') + compteur caches à la suite
+- Ajustement de la barre bas de page (padding right) pour libérer l’espace du FAB
+- Correction z-index du FAB pour garantir son accessibilité
+612b55ca669c76ac47e90b98676c2fb75aa0fff8	2025-09-20 12:57:32 +0200	Jean Ceugniet	backend/auth	fix(caches): correct $project in aggregation
+(type/size label+code)
+
+- Replace mixed inclusion/exclusion $project with pure inclusion to avoid MongoDB error 31254
+- Ensure get_by_gc and get_by_id always return type/size as {label, code}
+- Compact helper unified: consistent output across list and detail routes
+- Improved error clarity (no false “2dsphere index required” on projection errors)
+eec2b2d86d350d789340f8561074e513d58adf12	2025-09-20 11:54:17 +0200	Jean Ceugniet	backend/auth	feat(caches): bascule vers payload “slim” (IDs)
++ préparation détail à la demande
+
+- Docker compose : unification dev / prod pour lancement homogène
+- Map: markers basés sur type_id/size_id/state_id (+ attributes en IDs)
+- Adapte WithinRadius (et infra) pour consommer la version abrégée
+- Prépare le fetch du détail au clic (full cache → vue/modale dédiée)
+- Laisse le mapping IDs→libellés/icônes côté front pour une prochaine passe
+- Note backend: option par défaut “slim”, “full” au besoin
+(WIP: tables de correspondance, popups détail, filtres par IDs)
+4138c9d151ee27b44481a5e3508b5137320ff8a7	2025-09-19 22:58:14 +0200	Jean Ceugniet	backend/auth	feat(tiles): ajuste rate limit dans tiles.conf
+- relève le quota côté client→serveur ; conserve 2r/s + burst=5 vers l’upstream OSM
+
+feat(map): MapBase (Leaflet) réutilisable
+- tuiles via /tiles, support retina, attribution
+- centrage sur profil (lat/lon) sinon France ; zoom 5
+- expose map + events (ready/click)
+
+feat(caches): MapDemo (plein écran, meta dense/noFabPadding)
+
+feat(caches): WithinRadius MVP
+- overlay UI (pick sur carte / ma position, rayon km, rechercher)
+- cercle de portée, requête API, compteur résultats
+- clustering (leaflet.markercluster)
+
+fix(ui): z-index overlay + wiring événements ; centrage depuis /my/profile/location
+
+chore: deps & CSS leaflet + markercluster
+
+WIP: within-bbox, by-filter, filtres/bottom sheet, popups
+c00bc926f78f567796f687feb0b6f9770a72689c	2025-09-19 18:17:48 +0200	Jean Ceugniet	backend/auth	feat(frontend)!: split profils dev/prod + proxy
+/tiles en dev
+
+- Sépare le front en deux profils :
+ - dev : Vite + HMR (5173), proxy /api → backend, /tiles → tiles
+ - prod : build Vite, servi par Nginx (8081), proxy /api et /tiles
+- Ajoute/alimente VITE_API_URL=/api et VITE_TILE_URL=/tiles/{z}/{x}/{y}.png
+- Autorise http://localhost:8081 dans ALLOWED_ORIGINS
+
+feat(infra/tiles): proxy cache OSM aligné sur leurs prérequis (headers & rate)
+
+- Nginx tiles.conf :
+ - Rotation a/b/c via split_clients ($remote_addr$request_uri → $tile_host)
+ - SNI/Host dynamiques (proxy_pass https://$tile_host; proxy_ssl_name/Host $tile_host)
+ - DNS Docker resolver 127.0.0.11 (+ resolver en location) pour host variable
+ - Respect strict des en-têtes OSM : proxy_pass_header Cache-Control/Expires/ETag/Last-Modified
+ - Retrait de tout add_header Cache-Control côté proxy
+ - Revalidation: proxy_cache_revalidate on
+ - Bypass ciblé sans polluer l’upstream : map $http_cache_control → $client_no_cache,
+ proxy_cache_bypass $client_no_cache, et proxy_set_header Cache-Control ""/Pragma ""
+ - UA conforme OSM : reprise de l’UA client + suffixe contact (map $http_user_agent → $osm_ua)
+ - Timeouts & résilience : proxy_connect/read/send_timeout, proxy_next_upstream(_tries)
+ - Compression neutralisée pour éviter la variance CDN : proxy_set_header Accept-Encoding ""
+ - Logs vers stdout/stderr, en-têtes debug X-Cache-Status / X-Upstream-Host / X-Upstream-CC (retirables)
+ - Cache uniquement erreurs/404 (1m) ; pas de TTL forcé sur 200/302
+- Healthcheck du service tiles (wget 127.0.0.1/tiles/_health.png)
+- Volumes persistants (cache disque), structure ops/nginx avec _health.png
+
+BREAKING CHANGE: le front prod écoute désormais sur 8081 (Nginx) et attend VITE_API_URL=/api.
+4eff6f5782d1305e7c28a25cdf5effb94b6596d8	2025-09-16 09:49:35 +0200	Jean Ceugniet	backend/auth	Test commit for Discord webhook
+03b09813aebf93e5748b60bb755eec566974685e	2025-09-16 08:29:12 +0200	Jean Ceugniet	backend/auth	Test commit for Discord integration
+f5dd5833372f3f0e8aacfbbd1d2d7866d0b910f1	2025-09-16 08:07:08 +0200	Jean Ceugniet	backend/auth	Code cleanup
+6031ec66898cba15e34d49cb77464cfe548181a8	2025-09-16 00:11:14 +0200	Jean Ceugniet	backend/auth	Merge pull request #1 from MarvinLeRouge/infra/tiles-proxy-cache
+
+infra(tiles): add tiles service with persistent cache volume and startup command
+add /tiles proxy+disk cache with OSM upstream rotation and health endpoint
+
+dockercompose :
+tiles service : command is mandatory (conflict with default config file)
+health check on port 8080, resource /tiles/_health.png
+649e00a59d43969fee6cdba64f0e2bdeca15ff67	2025-09-16 00:05:01 +0200	Jean Ceugniet	backend/auth	infra(tiles): add tiles service with persistent
+cache volume and startup command
+add /tiles proxy+disk cache with OSM upstream rotation and health endpoint
+1e29f456d73057183478b97ff40fed8e6ffd63cb	2025-09-13 22:26:08 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/main'
+8bcdbf39ce56908f5b0c95159fb87851f864a6bf	2025-09-13 22:25:42 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/caches' into backend/main
+686ce97ac71551f6d3a14e2a022e60e0b3016609	2025-09-13 22:24:04 +0200	Jean Ceugniet	backend/auth	Merge remote-tracking branch 'refs/remotes/origin/backend/caches' into backend/caches
+0398eb0b90c0812beb117de6c2e038607a972125	2025-09-13 22:10:34 +0200	Jean Ceugniet	backend/auth	feat(api): limite de taille pour l’upload GPX/ZIP
++ 413
+
+- Ajoute un middleware `MaxBodySizeMiddleware` (early abort sur Content-Length)
+- Lecture en streaming côté route `/upload-gpx` avec plafond dur (413 si dépassement)
+- Paramétrage via settings: `MAX_UPLOAD_MB`, `ONE_MB` et propriété `max_upload_bytes`
+- Documente la limite dans la description OpenAPI de la route
+- Ajoute tests: >limite ⇒ 413, juste sous la limite ⇒ 200
+
+Notes:
+- Penser à aligner la limite côté reverse proxy (ex. Nginx: client_max_body_size).
+- Retire `max_upload_bytes` du modèle Pydantic en tant que champ env (utilise @property).
+635a7e0ff2a1b3a33ab12b3f0db9f9ca4577ad6b	2025-09-12 18:20:25 +0200	Jean Ceugniet	backend/auth	feat(router): add Challenges routes with
+_NotImplemented placeholders
+
+- /my/challenges (list)
+- /my/challenges/:ucId (detail)
+- /my/challenges/:ucId/tasks (tasks)
+- /my/challenges/:ucId/progress (progress)
+- /my/challenges/:ucId/targets (targets, dense + noFabPadding)
+- alias /my-challenges → /my/challenges
+- each route notes planned component path in comments
+f20b20f979fcccb43b808c966d993037e75e5ee5	2025-09-12 18:06:24 +0200	Jean Ceugniet	backend/auth	feat(ui): add generic "Not Implemented Yet"
+placeholder view
+
+- new src/pages/_NotImplemented.vue with title/message/help props
+- reusable across sections; icon + CTA (Home/Help)
+- handy default for WIP routes
+35d41d25c3431629e99bf2f7c043b0a2ebe1f21d	2025-09-12 18:05:48 +0200	Jean Ceugniet	backend/auth	feat(caches): GPX/ZIP import page with “found”
+toggle & summary
+
+- add /caches/import-gpx route + ImportGpx.vue (multipart upload, .gpx/.zip, single file)
+- “found” checkbox → query ?found=true|false (default false)
+- upload progress + success/error toasts (handles 400 malformed file)
+- display API summary and optional challenge_stats
+- after success: trigger /my/challenges/sync and show result
+58f9f6645e4e3f04c3bbb8049b9b6ed5644cc553	2025-09-04 23:21:40 +0200	Jean Ceugniet	backend/auth	ci : docker optimization for prod
+2408c261850b0d7bc5041c5896c4e6fedce4bd92	2025-09-04 22:34:23 +0200	Jean Ceugniet	backend/auth	ci: fix deploy job with --env-file and verbose logging
+fbacd8dc480564698617bcaeae09a936f88f9922	2025-09-04 21:53:16 +0200	Jean Ceugniet	backend/auth	ci : config optimization for prod
+f1a22e04ed7b5024a01ab5aadd7e8abda712a31b	2025-09-04 18:47:38 +0200	Jean Ceugniet	backend/auth	Merge branch 'frontend/main'
+3ad5f25fbd9b781b1f254fca310a2bdf21184960	2025-09-04 18:42:38 +0200	Jean Ceugniet	backend/auth	Merge branch 'frontend/home' into frontend/main
+b6e3e17221e80adfb7b6dc015171d0aa5754e473	2025-09-04 18:41:56 +0200	Jean Ceugniet	backend/auth	Merge branch 'frontend/ui-foundation' into frontend/main
+d20334933b6f005886d99c53de54f7727dfead82	2025-09-04 18:18:18 +0200	Jean Ceugniet	backend/auth	ci : fix build-deploy action
+b93fcf0c7170a2af309e23c0da76290c2f014b48	2025-09-04 18:06:44 +0200	Jean Ceugniet	backend/auth	ci : Github push actions added deploy on prod
+6fba1f3216dc349954f73662c1011d5c51383d84	2025-09-04 18:04:56 +0200	Jean Ceugniet	backend/auth	test : Modified README.md to trigger push-deploy
+789601659f8c4eba33bde02b7905eef978cde40c	2025-09-04 16:42:14 +0200	Jean Ceugniet	backend/auth	test : Modified README.md to trigger push action
+f9a0fd84d5e77a0338e16cf50e587b5b4325b281	2025-09-04 16:41:20 +0200	Jean Ceugniet	backend/auth	ci : Github push action full url to lowercase
+ee5480d45456dc18f1adf0a691c243f5cc243079	2025-09-04 16:32:51 +0200	Jean Ceugniet	backend/auth	Modification test pour push action
+e3d866b336dc169ddab1863d11c441f095d13220	2025-09-04 16:28:50 +0200	Jean Ceugniet	backend/auth	ci: add GitHub Actions workflow to build and push
+Docker images to GHCR
+9bff88dbc9ac1e0b4fccca768f3c0459f3e9c7d9	2025-09-03 11:01:46 +0200	Jean Ceugniet	backend/auth	Merge branch 'frontend/ui-foundation' into frontend/home
+8b3ff468545a5f484f5cc74d2b0235f8c00555c7	2025-09-02 18:45:27 +0200	Jean Ceugniet	backend/auth	feat(ui): add brand icon with white stroke
+0b04fcd55c33df5bd81a35d331cc00c018b27f8e	2025-09-01 13:53:31 +0200	Jean Ceugniet	backend/auth	feat(home): teaser landing with step-by-step, big icons & CTA
+
+- Intro now names GeoChallenge Tracker (hero gradient)
+- Step-by-step grid with large icons (Heroicons)
+- Dynamic CTAs (register/login vs import GPX / mes challenges)
+- Final teaser section “Prêt ? Partez !”
+- Mobile-first styling, tidy spacing
+- git ignore : added csv and GPX
+9008d93572a73ad0d3769c29c05c8841f0e59d62	2025-08-30 15:07:42 +0200	Jean Ceugniet	backend/auth	feat(router): global auth guard (deny-by-default)
++ publics par préfixe
+
+- beforeEach: protège tout sauf routes publiques (names: login/register/verify-email/resend/home/404/legal)
+- support des préfixes publics (/help/**) sans lister chaque page
+- retire la dépendance à meta.requiresAuth; conserve meta.dense pour les pages carte
+- init() restaure l’access sans refresh proactif
+b8b83ef02cc4ff76261bfc936e837fb9a7d9539e	2025-08-30 12:18:55 +0200	Jean Ceugniet	backend/auth	feat(auth): login/register, refresh tokens, guards
++ toasts
+
+- Login: identifiant (email OU username) + password en x-www-form-urlencoded
+- Axios: intercepteur 401 → refresh “lazy” (single-flight) + retry; baseURL=/api
+- Tokens: access en sessionStorage, refresh en localStorage; logout purge tout
+- Store: init() restaure l’access sans refresh proactif puis fetchMe()
+- Router: routes publiques (/login, /register, /verify-email, /resend-verification) + guards requiresAuth avec ?redirect
+- UI: pages Login & Register avec vue-sonner (installé) ; gestion erreurs 400/409/422 (msg/detail)
+- AppShell: menu public/privé cohérent (Connexion/Inscription visibles si non loggé)
+c1096fc49c414a8e5379322e8d9a243fe6044f87	2025-08-30 12:14:46 +0200	Jean Ceugniet	backend/auth	fix(auth): envoi email de vérification via
+BackgroundTasks + corrections
+
+- register / resend-verification : envoi via FastAPI BackgroundTasks (plus de coroutine non awaitée)
+- resend-verification : passage du username à la fonction d’email
+- email : texte aligné sur expiration 24h
+- minor : projection du username ajoutée dans resend-verification
+b617ed0069f77456a4944cf0053141b6c866feea	2025-08-29 22:31:31 +0200	Jean Ceugniet	backend/auth	feat(ui): Flowbite + icônes + menu accordéon
++ logo SVG
+
+- add Flowbite & Flowbite-Vue; Tailwind config (content + plugin), CSS global branché
+- add Heroicons (et support Lucide pour 🎯 Targets) ; icônes intégrées aux items
+- implement AppShell drawer + FAB, sections en accordéon (ouverture auto selon route)
+- menu public/privé filtré, section Aide/FAQ dédiée, lien “Mentions légales” en footer
+- header affiné (hit-area 44px) et intégration du logo SVG
+003d4847b40135e0f4b9ce7f951f51957e73acda	2025-08-29 11:19:40 +0200	Jean Ceugniet	backend/auth	chore(auth): initialize auth feature branch
+(scaffold)
+
+- create frontend/auth branch for upcoming login/register/verify/resend work
+- no functional changes yet
+1dab60ab4acbbbcd8f4a3de964ea6e77e664320c	2025-08-28 17:55:32 +0200	Jean Ceugniet	backend/auth	feat(appshell): base layout + router + home dummy
+3d20e273fd93e9134c16f63f59e8f77be5938e6f	2025-08-28 17:32:01 +0200	Jean Ceugniet	backend/auth	build(frontend): Docker dev env (Vite+HMR) + API proxy + multi-stage Dockerfile
+
+- add multi-stage Dockerfile (dev target + build + prod nginx)
+- configure Vite proxy: /api -> http://backend:8000, host 0.0.0.0, HMR enabled
+- update docker-compose to run dev target, expose 5173, enable polling, mount volumes
+- add nginx.conf for prod with /api reverse proxy
+c1d5dc1f98bfd03263ddc5574a2bfb670b01b2bf	2025-08-28 11:51:24 +0200	Jean Ceugniet	backend/auth	feat(progress): ajout des dates de début/fin et
+estimation de complétion des tâches & challenges
+
+- models/user_challenge_task.py : ajout des champs persistés start_found_at et completed_at
+- models/user_challenge_task_dto.py : exposition start_found_at et completed_at (lecture)
+- models/progress_dto.py : ajout du champ estimated_completion_at sur chaque tâche et sur le snapshot global
+- services/progress.py :
+ * calcul et persistance de start_found_at (1ère trouvaille) et completed_at (n-ième trouvaille) lors de evaluate_progress
+ * enrichissement des réponses GET progress avec completed_at et estimated_completion_at
+ * estimation dynamique de la date de complétion en fonction de la vitesse réelle de progression
+- api/routes/maintenance.py : ajout d’une route de backfill permettant de recalculer start_found_at et completed_at pour les tasks existantes
+525acf70e2d88007ac0debad5df0e43c6b8ca924	2025-08-28 11:50:16 +0200	Jean Ceugniet	backend/auth	feat(maintenance): ajout d’un module dédié et
+sécurisation globale par rôle admin
+
+- création d’un module de routes /maintenance
+- centralisation du contrôle d’accès via require_admin dans core/security
+c03cd3d3f1a92f65f50ee5e6af54cb25a465b479	2025-08-27 17:12:31 +0200	Jean Ceugniet	backend/auth	docs(api): documentation inline et en-têtes
+Swagger sur toute l’API
+
+- Ajout d’un header de fichier `# backend/...` + description courte
+- Décorateurs de routes avec `summary`/`description` + paramètres documentés
+- Docstrings fallback complètes (Summary/Description/Args/Returns)
+- Sécurité : auth exigée au niveau des APIRouter (sauf auth/base)
+- fix(routes): utiliser Path pour les paramètres d’URL (au lieu de Query)
+- Aucun changement fonctionnel attendu
+1031b0b2198c299b3ae843546f8a87afcfe93faf	2025-08-26 21:18:08 +0200	Jean Ceugniet	backend/auth	test(targets): refonte des tests e2e avec auth
+réelle et nettoyage des anciens scénarios
+
+- ajout d’un test pytest e2e couvrant le cycle complet :
+ * authentification via /auth/login avec ADMIN_USERNAME / ADMIN_PASSWORD
+ * evaluate (force/skip), list, nearby, cohérences (pas de found caches, pas de caches posées par l’utilisateur)
+ * nettoyage des documents targets créés pour éviter tout effet destructif
+- suppression des anciens tests unitaires partiels (test_targets_routes, test_targets_service_multi, test_targets_service_uc)
+ devenus obsolètes et redondants avec ce test intégré de bout en bout
+d2901814ad7b136aaaae8e727f6d29ea825fb4db	2025-08-26 18:19:32 +0200	Jean Ceugniet	backend/auth	feat(targets): implémentation complète des routes
+et factorisation moteur d’évaluation
+
+- api/routes/my_challenge_targets.py : ajout des endpoints définitifs (evaluate, list, nearby, clear), uniformisés avec TargetListResponse
+- api/routes/targets.py : supprimé (ancien résidu de tests)
+- app/db/seed_indexes.py : ajout et rationalisation des indexes pour la collection targets (unicité, score, géo, tri récents)
+- app/models/target.py : typage structuré des diagnostics (subscores séparés : tasks / urgency / geo)
+- app/services/progress.py : factorisation de la compilation AST→match via query_builder, suppression des doublons internes
+- app/services/query_builder.py : centralisation de la compilation des expressions, support des formes legacy (codes, names, ids), usage du cache de référentiels
+- app/services/referentials_cache.py : renommage des fonctions publiques (plus de préfixe underscore)
+- app/services/targets.py : implémentation complète du calcul des targets (anti-join caches trouvées, scoring, persistance), listings (avec nearby), support du paramètre force
+- app/services/user_challenge_tasks.py : enrichissement des expressions avec codes/names/ids, conservation des codes pour lisibilité GET
+- app/services/user_profile.py : helpers de localisation utilisés par les filtres géographiques (nearby)
+795de4f88a57440bfe522aa7bd7b64fa647d2893	2025-08-25 19:00:02 +0200	Jean Ceugniet	backend/auth	refactor(user_challenge_tasks): centralize AST
+normalization and factorize helpers for reuse in progress/targets
+
+- services/user_challenge_tasks.py :
+ - ajout `_normalize_code_to_id` pour convertir codes/names → ids/doc_ids
+ - application de la normalisation au moment du put/validate
+ - factorisation des helpers (legacy_fixup, preprocess_expression_default_and) pour usage transversal
+ - validation étendue : obligation d’un country_is sibling quand state_in, vérifications de ranges, etc.
+
+- models/challenge_ast.py :
+ - confirmé la structure AST compatible avec les nouveaux champs codes/names
+ - préparation pour compilation Mongo uniforme
+
+- models/cache.py / models/found_cache.py :
+ - précisions sur la structure de `attributes` et références (cache_attribute_doc_id, …)
+
+- models/progress_dto.py :
+ - arrondi de `percent` à 1 décimale (lisibilité), tout en stockant les valeurs brutes
+
+- models/user_challenge_task_dto.py :
+ - DTOs alignés avec la nouvelle forme canonique des tasks (status optionnel inclus)
+
+- services/targets.py :
+ - squelette complet des méthodes evaluate/list/delete/choose_primary_task
+ - préparation pour intégration avec helpers factorisés
+
+Objectif : avoir un pipeline unifié de compilation AST → prédicats Mongo,
+réutilisable aussi bien pour le calcul de progression (found caches) que pour
+l’identification des targets (not found caches).
+51b21b033a1d95503933701c4c2e2190f26c3e51	2025-08-25 11:50:23 +0200	Jean Ceugniet	backend/auth	feat(progress): improve evaluation flow, status
+handling and consistency
+
+- Progress percentages: now rounded to 1 decimal for display (DTO level)
+ while keeping full precision in DB snapshots
+- UserChallengeTask: status automatically updated to "done" at evaluation
+ when conditions are met
+- UserChallenge: computed_status set to "completed" only if all tasks are
+ done, updated during evaluation
+- Evaluation route: added `force` parameter (admin-only) to override normal
+ short-circuit and recompute progress even if completed
+- Replaced all uses of datetime.utcnow() with utcnow() wrapper
+ (datetime.now(datetime.timezone.utc)) for consistency and deprecation safety
+- Removed obsolete "engine version" field (previously used for development)
+8e1ae3c20cacf2cd42d054cda6edf0eadae2b755	2025-08-23 16:53:39 +0200	Jean Ceugniet	backend/auth	refactor(referentials): centralize referentials
+cache + code→id resolution
+
+- Extracted collections mapping and resolvers into new module services/referentials_cache.py
+ • Holds in-memory cache of cache_types, cache_sizes, cache_attributes, countries, states
+ • Provides _resolve_* helpers for code/name→ObjectId lookups
+ • Added refresh_referentials_cache() entrypoint after seeding
+
+- services/user_challenge_tasks.py:
+ • Updated to use referentials_cache for normalization
+ • Normalizes codes/names to canonical ids for attributes, types, sizes
+ • Stores expressions with resolved *_doc_id for progress evaluation
+
+- services/progress.py:
+ • Updated AST compiler to tolerate legacy tasks still carrying codes
+ • Fallback via referentials_cache ensures proper matching on attributes, types, sizes
+
+This refactor removes cross-dependencies between services and guarantees
+consistent code→id mapping across validation, storage, and progress evaluation.
+9915d19dfe3c577d8cee7d48e07a9b8b96fd10cb	2025-08-23 12:58:01 +0200	Jean Ceugniet	backend/auth	fix(user-challenge-tasks): cleanup resolvers and
+ensure canonical AST
+
+- Removed duplicate _resolve_* helpers to avoid shadowing and unpacking errors
+- Fixed _normalize_code_to_id to use canonical keys:
+ • cache_attribute_doc_id / cache_attribute_id
+ • cache_type_doc_id
+ • cache_size_doc_id
+- Added legacy_fixup_expression to auto-convert old payloads
+ (e.g. codes → [{code: ...}]) when reading tasks
+- Guarantees consistent TaskExpression validation across new and legacy data
+c48ca5974271bec0e50b29dc76c4196711710d01	2025-08-23 12:10:52 +0200	Jean Ceugniet	backend/auth	feat(validation): enforce country requirement
+for state_in rules
+
+- user_challenge_tasks.validate_task_expression:
+ • Added check that any state_in rule must appear in the same AND group
+ as a country_is rule
+ • Prevents ambiguous state resolution across countries
+e14e4fdd0aca2a3bf9b27dcfb3bd2e89a975e0dc	2025-08-23 12:00:06 +0200	Jean Ceugniet	backend/auth	refactor(my-challenges): align referentials and
+DTOs for functional consistency
+
+This branch required several transversal changes to ensure user_challenges
+and user_challenge_tasks work correctly. Some of these belong to backend/main
+(e.g. seeding), but were addressed here as they are prerequisites for this
+branch to function.
+
+- data/seeding (backend/main impact):
+ • Normalized business IDs per collection (cache_type_id, cache_size_id, cache_attribute_id)
+ • Updated seed scripts to use consistent field names
+
+- services/user_challenges.py:
+ • Enriched list and detail responses with cache {id, GC} for readability
+
+- services/user_challenge_tasks.py:
+ • Introduced caching layer for referential collections (cache_types, cache_sizes,
+ cache_attributes, countries, states) loaded once at module init
+ • Unified code/name → id resolution (case-insensitive, hierarchical for states)
+ • Normalization step now resolves selectors expressed by code or name
+
+- models/user_challenge_task_dto.py:
+ • Renamed response wrapper field `items` → `tasks` in TasksListResponse for clarity
+
+- models/user_challenge_dto.py:
+ • Extended ListItem and DetailResponse with essential cache info {id, GC}
+
+- models/challenge_ast.py:
+ • Extended AST selectors to allow code/name alongside ids for types, sizes,
+ countries and states
+
+- api/routes/my_challenges.py:
+ • Reordered routes for consistency (sync, list, batch, patch, detail)
+
+- api/routes/my_challenge_tasks.py:
+ • Renamed response wrapper field `items` → `tasks` for consistency with DTO
+
+BREAKING CHANGE:
+- The field `items` in user_challenge_tasks responses is now `tasks`.
+ This affects API consumers (front/tests) and must be updated accordingly.
+b54e643c943fd4706e4cae11a3f8ac8df0e01e16	2025-08-22 14:41:07 +0200	Jean Ceugniet	backend/auth	fix(my_challenge_tasks): align list & put
+responses with TaskOut DTOs
+
+- put_tasks: return a plain List[TaskOut] (instead of {"ok","count"})
+ * map Mongo _id -> id
+ * ensure required 'title' (default "Task #n") and 'status' (default "todo")
+ * include TaskOut fields (expression, constraints, metrics, progress…)
+
+- list_tasks: return {"items": [TaskOut, ...]} instead of raw Mongo docs
+ * drop internal fields (user_challenge_id, etc.)
+ * map _id -> id and add fallback title
+ * fully conform to TasksListResponse schema
+cc91f07331c3b4952f92d8847220610c6741d07a	2025-08-22 14:04:13 +0200	Jean Ceugniet	backend/auth	fix(tasks-validate): return structured
+ValidationErrorItem for FastAPI response_model
+
+- user_challenge_tasks.validate_only: map exceptions to {index, field, code, message}
+- avoid returning raw strings in `errors` which broke Pydantic serialization
+- keeps business validation unchanged; only response shape is fixed
+- security.py : access token => 60 minutes for development purposes
+00a32552e964ea25d6cf7ce09dffa00eba98547f	2025-08-22 12:15:37 +0200	Jean Ceugniet	backend/auth	feat(my_challenges): expose related cache in
+UserChallenge detail
+
+- Ajout du champ cache { id, gc } dans l’agrégation get_user_challenge_detail
+- Sérialisation ObjectId → str pour cache.id
+- Mise à jour du DTO de sortie pour inclure le bloc cache
+- Correction : l’info cache était calculée mais filtrée par le response_model
+c000cfc13ffff7afd40a7e4879ba2ed72fe5d72a	2025-08-22 11:32:38 +0200	Jean Ceugniet	backend/auth	tests(my_challenges): add full coverage for
+sync, list, detail, patch & batch
+
+- Homogénéisation des tests avec payload paginé {items, total, page, limit}
+- Vérification du détail UserChallenge (challenge/challenge_id)
+- PATCH unitaire : mise à jour notes + immutabilité challenge_id
+- PATCH batch : payload spec {uc_id, ...}, validation réponse {results,total,updated_count}
+- Lecture en détail pour vérifier notes (non exposées dans la liste)
+- Cas d’erreurs 400/404 pour ids invalides
+c8e0775709ef1a1fcb52bda29ec3bf271f53bdc1	2025-08-22 10:50:00 +0200	Jean Ceugniet	backend/auth	(fix) user_challenge_tasks : recover from
+partial rollback
+34916dfdd15c1c4e5d27c5608c6a4de2bf21399c	2025-08-22 10:07:57 +0200	Jean Ceugniet	backend/auth	merge(branch): backend/progress → main
+
+Intégration du support des agrégats dans l’évaluation du progress :
+- Calcul MongoDB ($sum) pour difficulté, terrain, diff+terr, altitude
+- Bloc aggregate {total, target, unit} exposé dans le DTO par tâche
+- Percent combiné avec min_count si présent
+16d0829e4a7b8d96ad7d2efa2cf6e36676798700	2025-08-22 10:07:06 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/user-challenges' into backend/mainmerge(branch): backend/user-challenges → main
+
+Intégration de la gestion des tasks avec agrégats dans les user challenges :
+- Validation des expressions avec agrégats
+- Compatibilité avec l’évaluation du progress
+- Cohérence entre min_count et agrégats
+6db6daad008983916f1e324a7d676495dd7e3a19	2025-08-22 10:04:09 +0200	Jean Ceugniet	backend/auth	feat(challenges): extension de l’AST pour inclure
+des feuilles d’agrégat
+
+- Nouvelles règles :
+ * aggregate_sum_difficulty_at_least
+ * aggregate_sum_terrain_at_least
+ * aggregate_sum_diff_plus_terr_at_least
+ * aggregate_sum_altitude_at_least
+- Validation renforcée : agrégats autorisés uniquement sous AND
+- Limitation à un seul agrégat par task (MVP)
+1b96787a39d17cadd337712998332657a425a7e3	2025-08-22 10:01:54 +0200	Jean Ceugniet	backend/auth	feat(progress): support aggregate tasks
+(sum difficulty, terrain, diff+terr, altitude)
+
+- Ajout de AggregateProgress / AggregateProgressOut pour exposer les résultats d’agrégats par tâche
+- Mise à jour des modèles et DTO pour inclure le bloc aggregate { total, target, unit }
+- Implémentation de l’évaluation Mongo ($sum) dans services/progress
+- Calcul cohérent du percent combiné avec min_count si présent
+b57eabec061072b954bc6c8d4f76eec8e990e525	2025-08-22 09:57:46 +0200	Jean Ceugniet	backend/auth	(feat) services/user_challenge_tasks.py
+Added aggregate tasks possibility : challenge tests based on
+aggregate properties (typically sum)
+52b30cc3cb76bba2eb4e4e8e90d7c3c06d2c5b36	2025-08-22 00:52:05 +0200	Jean Ceugniet	backend/auth	(feat) my_challenges : Added batch patch route
+
+ - Added route to patch a batch of user_challenges simultaneously
+a693252b4fdade26e18307ef750214d482cba2ca	2025-08-21 22:21:19 +0200	Jean Ceugniet	backend/auth	(fix) caches route : all parametered paths after
+static ones
+7a29ff63b6908a95a67a144a764521e4735f9f36	2025-08-21 18:10:58 +0200	Jean Ceugniet	backend/auth	feat(elevation): ajout de la récupération
+automatique des altitudes lors de l’import GPX
+
+- Intégration du service elevation_retrieval (wrapper générique de provider)
+- Implémentation du provider OpenTopoData (quotas, rate-limit, chunking URL)
+- Enrichissement automatique des nouvelles caches avec le champ elevation
+- Ajout d’une route admin /caches/elevation/backfill pour compléter les altitudes manquantes
+- Passage de import_gpx_payload en async pour cohérence
+1c10680805a2336d6e8efefdc312f3b62dcfd914	2025-08-21 17:16:31 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/fastapi' into backend/caches
+72728fedf43e8fc6c5bdf2fc49bf1b51aea76f8e	2025-08-21 17:16:01 +0200	Jean Ceugniet	backend/auth	Fix upload-gpx return format
+7d9a29ec282ab087c7bde35231e6256116c5c80d	2025-08-21 15:07:05 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/targets' into backend/tests
+1f5c0f8e914557800656bd21fe3e39b40bdad949	2025-08-21 14:56:14 +0200	Jean Ceugniet	backend/auth	feat(targets): add targets DTOs and adjust
+import paths
+
+- introduce app/models/target_dto.py (TargetOut, TargetsPreview* DTOs)
+- update services/targets.py to import DTOs from app.models
+- update api/routes/targets.py to import get_current_user from app.core.security
+- cleanup imports for consistency with project structure
+daee3504b3950cf922c7e1db34594e42913e0be7	2025-08-21 14:53:52 +0200	Jean Ceugniet	backend/auth	tests(targets): add pytest suite for targets
+service and routes
+
+- unit tests for per-UC preview (per_task and global)
+- unit tests for multi-UC preview (global set-cover)
+- route smoke test with fake auth and service monkeypatch
+- tests are self-contained with async monkeypatching and no conftest
+e7dfe3786ae16676e41b7471b0168dd5557a9fc2	2025-08-21 11:19:28 +0200	Jean Ceugniet	backend/auth	feat(targets): add preview endpoints for
+challenge targets
+
+- introduce DTOs in target_dto.py (TargetOut, TargetsPreviewPerTaskResponse, TargetsPreviewGlobalResponse, etc.)
+- add service layer (services/targets.py) using $geoNear for distance_km
+- implement per-UC endpoint: GET /my/challenges/{uc_id}/targets/preview
+- implement multi-UC endpoint: GET /my/targets/preview
+- support both per_task and global (set-cover) modes
+- ensure exclusion of already found caches, AND-only AST support
+- scoring includes multi-cover bonus and distance penalty
+8108fa4cecf445d53f9352da9d26fa6cd0fa6de5	2025-08-20 00:04:37 +0200	Jean Ceugniet	backend/auth	fastapi : migrer on_event(startup) vers
+lifespan
+
+- Exécute ensure_indexes() au startup via lifespan
+- Option SEED_ON_STARTUP conservée (seed_referentials) dans le bloc startup
+- Prépare l’app pour les versions récentes de FastAPI (suppression du warning de dépréciation)
+ab4057a044539d4fe192220a1e6695f09b7236a0	2025-08-19 23:33:12 +0200	Jean Ceugniet	backend/auth	test(progress): smoke tests auto-suffisants (admin)
++ invariants agrégat
+
+- Fixtures dans le test (override get_current_user via admin DB)
+- Création de 2 tâches minimales si UC sans tasks (AND override done + OR unsupported)
+- Scénarios :
+ - evaluate → vérifie structure + agrégat recalculé côté test
+ - history & ordering (2 évaluations)
+ - batch new/progress idempotent
+ - auto-évaluation à l’acceptation (PATCH → snapshot créé)
+- Retrait des marks pytest.order pour éviter warnings
+d32cc859d3632fb45bf9aaf5e39950fa7e10648f	2025-08-19 22:31:50 +0200	Jean Ceugniet	backend/auth	progress : suivi de progression
++ évaluation à l’acceptation
+
+- Routes:
+ - GET /my/challenges/{uc_id}/progress : dernier snapshot + mini-historique
+ - POST /my/challenges/{uc_id}/progress/evaluate : évalue et insère un snapshot immédiat
+ - POST /my/challenges/new/progress : premier snapshot pour les UC acceptés sans progress
+- Service: app/services/progress.py (compilation AND-only, join found_caches↔caches, override task "done",
+ marquage or/not comme unsupported, agrégat borné)
+- Hook: évaluation automatique lorsqu’un user_challenge passe en status="accepted" s’il n’a aucun snapshot
+- DTO: app/models/progress_dto.py (ProgressOut, TaskProgressItemOut, ProgressGetResponse, ProgressEvaluateResponse)
+- Indexes: seed_indexes.py s’assure de (user_challenge_id, checked_at) sur la collection progress
+- Secu: toutes les routes protégées via get_current_user
+
+fix(dto): compat Pydantic v2 — conlist(..., min_items/max_items) → min_length/max_length
+(app/models/user_challenge_task_dto.py)
+
+Notes:
+- Pas de breaking change sur les routes existantes
+- Penser à lancer le seed des indexes si nécessaire
+- Les tâches or/not apparaissent mais sont exclues de l’agrégat (MVP)
+4963c2025e02a6dabbca7509cf4957f5df0416ee	2025-08-19 17:32:16 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/user-challenges' into backend/tests
+9b37b1066f393a20f112261e8572611e36100a84	2025-08-19 17:29:38 +0200	Jean Ceugniet	backend/auth	feat(backend/user-challenges): compléter les rules
+AST + valider TaskExpression via TypeAdapter
+
+- challenge_ast.py : enrichit le set de nœuds (and/or/not, type_in, size_in, country_is,
+ state_in, placed_year/before/after, difficulty_between, terrain_between, attributes),
+ unifie le discriminant `kind` et durcit la validation des champs requis.
+- services/user_challenge_tasks.py : remplace la validation directe de l’union par
+ un TypeAdapter[TaskExpression] (Pydantic v2) pour gérer proprement les Union,
+ avec messages d’erreurs explicites. Adapter instancié en module-level pour les perfs.
+- Aligne l’acceptation des ObjectId stringifiés dans les payloads (casting lors de la validation).
+
+Motivation : corriger le problème de typage sur l’Union TaskExpression et garantir
+une grammaire AST complète et strictement validée côté backend.
+abf9c984aea9cdb64f146757c13dc48ac1e17d84	2025-08-19 17:18:19 +0200	Jean Ceugniet	backend/auth	test(user_challenge_tasks): add comprehensive
+suite (verbose, reorder, delete, invalid refs, grammar errors, or/not)
+
+- New consolidated test file: tests/test_user_challenge_tasks_suite.py
+- Covers:
+ - verbose happy-path: validate_only → put → list (+progress 100% on done)
+ - reorder by id + idempotent PUT
+ - implicit delete when a task is omitted from payload
+ - invalid referentials (type/attribute IDs) → validation fails with errors
+ - AST grammar errors (bad kind, missing fields, empty AND) → validation fails
+ - acceptance of OR and NOT nodes → validation + persistence OK
+- Uses rich print for readable output and ensures DB cleanup (UC, tasks, challenge).
+5f8a15a3ae9c8d97be925a0fd2c4644c67936f0b	2025-08-19 12:16:51 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/user-challenges' into backend/fastapi
+d94f757aafe6bc217bcf42d73abd3a329bcc8109	2025-08-19 12:07:50 +0200	Jean Ceugniet	backend/auth	test(user-challenge-tasks): pytest verbeux
+validate→put→list + rendu humain des AST
+
+- Ajoute tests/test_user_challenge_tasks_verbose.py
+- Crée un challenge factice + user_challenge (admin), construit 3 tasks (2–4 conditions)
+- Affiche les conditions en AST et en rendu humain; exécute validate_only, put_tasks, list_tasks
+- Vérifie ordre, statut 'done' => progress 100%
+- Nettoyage complet (tasks, user_challenge, challenge) en teardown
+520c2ffc2f8cc172878fb1e4b7f97809080745c9	2025-08-19 11:45:15 +0200	Jean Ceugniet	backend/auth	user-challenge-tasks: routes + service + DTOs
+(CRUD groupé, validation AST, ordre)
+
+- Routes: app/api/routes/my_challenge_tasks.py
+ - GET /my/challenges/{uc_id}/tasks : liste ordonnée (order dès 0)
+ - PUT /my/challenges/{uc_id}/tasks : remplacement groupé (create/update/delete + reorder)
+ - POST /my/challenges/{uc_id}/tasks/validate : validation à blanc (sans persistance)
+ - Auth au niveau du router (Depends(get_current_user)) + contrôle ownership (uc.user_id)
+
+- Service: app/services/user_challenge_tasks.py
+ - Validation forte via TaskExpression (Pydantic) + référentiels (cache_type, cache_size, country, state, cache_attribute[cache_attribute_id])
+ - Titre auto si absent: "<challenge.name> - task {i+1}"
+ - Statuts supportés: todo | in_progress | done ; done => progress 100% + metrics.current_count=min_count
+ - Upserts idempotents + suppression des tâches absentes, rollback best-effort en cas d’erreur
+
+- DTOs: app/models/user_challenge_task_dto.py
+ - TaskIn/TaskOut/TasksListResponse/TasksValidate(In|Response)
+ - Champs alignés: expression: TaskExpression, constraints, metrics, progress, dates
+ - PyObjectId & datetime (ISO) cohérents avec MongoBaseModel
+
+BREAKING CHANGE: structure des payloads tasks (usage de `expression` plutôt que `rule`, statut normalisé).
+5707933aae91029d17828b4b767e95152b7768b4	2025-08-18 19:17:04 +0200	Jean Ceugniet	backend/auth	test(user-challenges): vérifie les compteurs
+effectifs + transitions + rollback propres
+
+- Ajoute tests/test_user_challenges_counts.py
+- Récupère l’admin (role=admin) et assert l’état initial: total=1016, completed=90
+- Sélectionne des UC pending et les passe en dismissed/accepted/completed via le service
+- Vérifie la cohérence des compteurs (total constant, pending en complément)
+- Restaure exactement les documents modifiés (rollback par replace_one)
+52086e3e95ff8404398ade90164eb4696e7afa4d	2025-08-18 19:03:29 +0200	Jean Ceugniet	backend/auth	user-challenges : Route /my/challenges
++ logique d’état effectif
++ DTOs
+
+- Routes (app/api/routes/my_challenges.py)
+ - POST /my/challenges/sync : crée les UserChallenges manquants (idempotent)
+ - GET /my/challenges : liste paginée avec filtrage par **statut effectif**
+ - GET /my/challenges/{id} : détail d’un UserChallenge
+ - PATCH /my/challenges/{id}: maj statut/notes, override manuel vers completed
+ - Auth au niveau du router, sérialisation PyObjectId & datetime via DTOs
+
+- Service (app/services/user_challenges.py)
+ - sync: auto-complete les UC dont la cache mère est dans found_caches
+ (computed_status=completed + progress=100% daté du found_date)
+ - list: filtres par **effectif** :
+ - completed = status=completed **ou** computed_status=completed
+ - dismissed/accepted exclus des completed
+ - pending = complément (ni accepted, ni dismissed, ni completed)
+ - patch_user_challenge: override manuel → progress 100% + tracing (overridden_at, reason)
+ - fix encodage ObjectId imbriqués & updated_at en datetime
+
+- DTOs (app/models/user_challenge_dto.py)
+ - PatchUCIn, PatchResponse, ListResponse(+ChallengeMini), DetailResponse(+ChallengeDetail)
+
+BREAKING CHANGE: le filtrage des statuts en liste s’appuie désormais sur le **statut effectif** (status + computed_status).
+d5e8cca414c7e9450dbb9c8d49d5ef2e5a2657f7	2025-08-18 16:11:31 +0200	Jean Ceugniet	backend/auth	test(challenges): ajout des tests d’auto-création
+des Challenges (attr 71) avec nettoyage différentiel
+
+- tests/test_challenge_autocreate.py :
+ - vérifie création sur sous-ensemble et idempotence
+ - vérifie absence de création quand le subset ne contient pas de challenges
+ - ne modifie pas le référentiel cache_attributes (id 71 requis, sinon skip)
+ - nettoie uniquement les caches/challenges insérés et restaure l’état initial
+4450cdb10560dbe06c9c4a330ee57f27eb542559	2025-08-18 16:02:49 +0200	Jean Ceugniet	backend/auth	challenges: auto-create Challenge depuis caches
+avec l’attribut 71 (is challenge) + endpoint admin + indexes
+
+- service app/services/challenge_autocreate.py :
+ - création idempotente des Challenges à partir des caches portant cache_attribute_id=71
+ - exclusion immédiate des caches déjà présentes dans `challenges`
+ - scan global optimisé via $lookup ou traitement d’un sous-ensemble (cache_ids)
+ - ajout du wrapper create_new_challenges_from_caches (évite tout scan global si subset vide / déjà connu)
+- route app/routers/challenges.py :
+ - POST /challenges/refresh-from-caches (protégé admin), payload optionnel cache_ids: List[PyObjectId]
+- seed indexes :
+ - multikey sur caches(attributes.attribute_doc_id, attributes.is_positive)
+ - composé sur user_challenges(user_id, status, updated_at desc)
+
+Note: l’appel automatique depuis /caches/upload-gpx est prévu via micro-patch séparé.
+583c6fc0982a8dda3acd50b235e38b1060014d28	2025-08-17 21:56:37 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/tests' into backend/fastapi
+9e94616f2bdf0bdb6cb6ae09076e67d81f6ae597	2025-08-17 21:55:53 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/caches' into backend/fastapi
+606ffa01a4de72004398bd4a32a35104e5cf90ae	2025-08-17 21:49:50 +0200	Jean Ceugniet	backend/auth	Updated tests
+2c50aa1062e23924aba8f5e24434539ada2aa2e4	2025-08-17 21:48:47 +0200	Jean Ceugniet	backend/auth	Modify importer for found caches
+59c52ea270aebfb8955675a6b072f191356e8054	2025-08-17 21:45:40 +0200	Jean Ceugniet	backend/auth	Auth login modified to login via API or swagger
+b1d7d7417441440882ade4eefbfd8126127362a9	2025-08-17 20:07:32 +0200	Jean Ceugniet	backend/auth	Small Depends issue
+fdb240fe89309c4b3f3b4a89278bfa8b8aaa5921	2025-08-17 19:52:41 +0200	Jean Ceugniet	backend/auth	caches: add geo radius search (loc + 2dsphere);
+update importer & routes
+38d313c720db375e6c9e366dccc316521569c570	2025-08-17 17:49:22 +0200	Jean Ceugniet	backend/auth	db: idempotent index seeding;
+case-insensitive uniques on users;
+partial unique for cache_attributes txt
+9b01dd541a51d8ae3c38edc667b4808511242338	2025-08-17 17:00:32 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/fastapi' into backend/auth
+496f2d2f2695432973f0dec11cafec7e1ce6751a	2025-08-17 16:58:20 +0200	Jean Ceugniet	backend/auth	Small corrections on models and seeding indexes
+.gitignore
+ adding zip files
+backend/app/db/seed_indexes.py
+ partial index on ptentially null field
+backend/app/models/_shared.py
+ missing import
+c2427ab1b9152dc093d6ef7174fb555baac7871a	2025-08-17 14:45:28 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/auth' into backend/fastapi
+c94d00eee5bcf900081f6fa407f3c0d3f7b2892f	2025-08-17 14:41:16 +0200	Jean Ceugniet	backend/auth	Merge branch 'backend/fastapi' into backend/tests
+8bef414f4ad4370974834ceb4d74b9467ab319c1	2025-08-17 14:23:42 +0200	Jean Ceugniet	backend/auth	Rebase verification
+11d56d216b43c44fad70c7907cc19d30da625b24	2025-08-17 14:22:16 +0200	Jean Ceugniet	backend/auth	Fictitious commit to verify rebase ok
+14cdbf14c50680ff5e0f4d7c2829b1ccf9688703	2025-08-17 14:09:22 +0200	Jean Ceugniet	backend/auth	Models update for consistency
+6f7aced13b802f31e7642105f60c129f0e9a5db8	2025-08-17 11:09:19 +0200	Jean Ceugniet	backend/auth	caches: models & services (elevation, GPX import, parser)
+5a73f88dc04e28aa389036bbd280f46fe2dfa6bf	2025-08-17 11:03:57 +0200	Jean Ceugniet	backend/auth	api: swagger integration (pydantic schema + oauth token path)
+5cf6b8deccbed13a2c40ffe2a34ae896b9d9ee38	2025-08-17 11:02:29 +0200	Jean Ceugniet	backend/auth	auth: add /auth/token route for Swagger
+7d72f7a1aa39c47f4123dd85151cb8504057054f	2025-08-16 14:36:03 +0200	Jean Ceugniet	backend/auth	Ensure all useful indexes are populated at startup
+892a8712a35a4838500082f22f31ebe3753f0ed6	2025-08-16 14:16:21 +0200	Jean Ceugniet	backend/auth	Total models revision
+1c3715d770c932ec4c633676170da0500bb041ae	2025-08-15 09:47:15 +0200	Jean Ceugniet	backend/auth	Seeding modification + name normalization
+
+backend/app/db/seed.py -> backend/app/db/seed_data.py
+ better naming
+backend/app/db/seed_indexes.py
+ ensure indexes
+backend/app/main.py
+ seed indexes on stratup. Seed data in DEV if needed.
+backend/app/models/cache.py
+ renamed fields to avoid confusion
+backend/app/models/attribute.py -> backend/app/models/cache_attribute.py
+ consistent naming
+backend/app/models/cache_size.py
+ better fields naming
+ added field order
+backend/app/models/cache_type.py
+ added field aliases
+backend/data/seeds/cache_attributes.json
+ consistent naming between seeds files and models
+backend/data/seeds/cache_sizes.json
+ consistent naming between seeds files and models
+backend/data/seeds/cache_types.json
+ consistent naming between seeds files and models
+backend/requirements.txt
+ version specific modules between passlib and bcrypt to avoid conflicts (not about seeding)
+0b92f3fee77cf048e10d1a93b0d52b77959ec820	2025-08-10 16:30:25 +0200	Jean Ceugniet	backend/auth	Added route caches/upload-gpx,
+for caches and found_caches
+
+backend/requirements.txt
+ updated : added xml parsing module
+backend/app/api/routes/__init__.py
+ added : caches route
+backend/app/api/routes/caches.py
+ updated : created caches route
+backend/app/db/mongodb.py
+ updated : added get_column function
+backend/app/db/seed_indexes.py
+ added : indexes seeding
+backend/app/models/cache.py
+ updated : include html description and owner, and better attributes management
+backend/app/models/found_cache.py
+ updated : date management in model
+backend/app/services/__init__.py
+ added : for modular use
+backend/app/services/gpx_importer.py
+ added : service to manage gpx import
+backend/app/services/parsers/__init__.py
+ added : for modular use
+backend/app/services/parsers/GPXCacheParser.py
+ added : utility class to import caches from gpx file
+backend/app/services/parsers/HTMLSanitizer.py
+ added : utility class to sanitize html content (essentially for cache description)
+backend/tests/test_upload_gpx.py
+ added : pytest to verify gpx upload
+aa0ad20e551a85c5f2e8e7d88339d562894b5eda	2025-08-09 09:21:56 +0200	Jean Ceugniet	backend/auth	Correcting erroneous data model
+
+The subdivision of a country is a state, not a county
+b6aabd0998845d5ac9197a159c48c0bfc721801e	2025-08-08 17:17:21 +0200	Jean Ceugniet	backend/auth	Auth : all user authentication routes
+and related functions (email verification, tokens, password hashing))
+340db2f48a4e1209c1ff856bbc90c5a2a775cceb	2025-08-08 17:15:00 +0200	Jean Ceugniet	backend/auth	Tests
+
+pytest on user creation, authentication, and all related routes
+6b10ba31776c86ff6bb0c1aa56e29eb4d95aad68	2025-08-08 17:06:54 +0200	Jean Ceugniet	backend/auth	Project configuration + code cleanup
+
+docker-compose.yml
+ Virtual SMTP host configuration
+
+backend/Dockerfile
+ FastApi auto-reload
+
+backend/app/api/routes/__init__.py
+ global import routes
+
+backend/app/core/utils.py
+ group utility functions
+
+all python file
+ code cleanup + filename at content start
+281555a10c59235beb7dc71fb34106af4846e047	2025-08-10 17:48:05 +0200	Jean Ceugniet	backend/auth	Merge pull request #97 from 2024-avril-devops-alt-dist/backend/caches
+
+Caches/upload-gpx to main backend branch
+b8edf8a084e1cd5b5b81eea11799910db9acd132	2025-08-08 17:25:21 +0200	Jean Ceugniet	backend/auth	Merge pull request #96 from 2024-avril-devops-alt-dist/backend/auth
+
+Auth to main backend branch
+573195d3f9f04bd28359303a900065a8acfafa1d	2025-08-08 17:24:16 +0200	Jean Ceugniet	backend/auth	Merge pull request #95 from 2024-avril-devops-alt-dist/backend/tests
+
+Tests to main backend branch
+16e0d9d00e6727bbe1b8404445a7c6456115233b	2025-08-07 19:54:24 +0200	Jean Ceugniet	backend/auth	Merge pull request #94 from 2024-avril-devops-alt-dist/backend/fastapi
+
+Backend fastapi init
+e02c52d9cac4707293c8fc6f5a778f197e06a450	2025-08-07 19:51:27 +0200	Jean Ceugniet	backend/auth	Branch backend init
+bc3755d2b454d7bbf6fd9d7058d2fb641a4ecb9d	2025-08-06 23:33:22 +0200	Jean Ceugniet	backend/auth	Merge branch 'install' into backend/fastapi
+0105cc7dc7c7b68925ef3b6dd285c5de69cd0aa8	2025-08-06 23:30:46 +0200	Jean Ceugniet	backend/auth	Modified docker compose to share .env
+between backend and frontend
+a595bd2641fbc517b0d0c2000afbc8a9a616a429	2025-08-06 22:11:50 +0200	Jean Ceugniet	backend/auth	Merge pull request #93 from 2024-avril-devops-alt-dist/install
+
+PR : install -> main
+753e96e41b74c434c140a9761df5bf1f46402d66	2025-08-05 00:05:16 +0200	Jean Ceugniet	backend/auth	Better module structure
++ Seeding user
++ pytest tests added
+
+core/bson_utils.py: pydantic version conflict
+core/security.py: authentication functions
+db/mongodb.py: MongoDB features grouping
+db/seed.py: Added admin user seeding
+Models: better datetime management (conflict between datetime and datetime.datetime during imports)
+Pytest tests added : user retrieval, password test with valid and invalid values
+26207d45a6ab5f993a22233351e7a3db740364f1	2025-08-02 20:05:55 +0200	Jean Ceugniet	backend/auth	Folder structure modification + Models
+
+Changed folder structure for seeding => seeding files moved
+Added models
+ac079d1bb64b4ace4e267fcd54b5fff774acf64f	2025-08-02 11:07:40 +0200	Jean Ceugniet	backend/auth	Seeding data
+.gitignore : avoid putting live data in the repo
+.gitkeep : preserve folders structure
+/data/seeding : seeding data
+30c121e89cf26aea469dfb7fb8b3d9c408f0e0ab	2025-07-09 23:58:28 +0200	Jean Ceugniet	backend/auth	Install - Frontend - Ultrabasic vue projet
+Backend connectivity test
+f9d02d047fd2a77fab821aa63bc4f6783bd3105f	2025-07-09 22:32:03 +0200	Jean Ceugniet	backend/auth	Install - Frontend - Serveur web
+2ab755f13e1eca392c338c0c87af82ba2604bd57	2025-07-09 00:17:03 +0200	Jean Ceugniet	backend/auth	Backend : Added MongoDb connectivity test
+ff106d7dd6162314de027b77812b05f651c79c5e	2025-07-07 23:32:18 +0200	Jean Ceugniet	backend/auth	Basic README.md
+dc642c7854e2a2493464f4de076c1d9a39222004	2025-07-07 23:21:05 +0200	Jean Ceugniet	backend/auth	Branch install : first commit
+
+.gitignore
+ Basic gitignore for python + vite project
+backend
+ Dockerfile
+ structure
+ uv project starter
+frontend
+ Dockerfile only
+docker-compose.yml
+ basic backend and frontend
+98174d62345f1ef523d38bb23db2b4189fba9ce2	2025-07-02 15:31:27 +0200	Jean Ceugniet	backend/auth	Initial commit

@@ -1,0 +1,178 @@
+%% "Diagramme de contexte général"
+flowchart LR
+  U["Utilisateur (Geocacheur)"] -->|"HTTP(S)"| FE["Frontend Web (Vue 3 + Vite/Nginx)"]
+  FE -->|"REST/JSON"| BE["API FastAPI (Uvicorn)"]
+  BE -->|Driver| MDB[("MongoDB Atlas")]
+  FE -.-> OSM[("OpenStreetMap Tiles")]
+  BE -.-> ODATA[["APIs OpenData Altimétrie / Reverse Geocoding"]]
+  BE -.-> SMTP[("SMTP Vérification email")]
+
+```
+```mermaid
+%% "Diagramme des conteneurs (déploiement dev/prod)"
+flowchart LR
+  subgraph Client
+    U["Browser\nMobile/Desktop"]
+  end
+  subgraph Prod
+    NGINX["Nginx\nStatic + Proxy"]
+    API["FastAPI\nUvicorn"]
+  end
+  MDB[("MongoDB Atlas")]
+  OSM[("OSM Tiles")]
+  ODATA[["OpenData APIs"]]
+  SMTP[("SMTP")]
+  U --> NGINX
+  NGINX --> API
+  API --> MDB
+  NGINX -. "tiles" .-> OSM
+  API -.-> ODATA
+  API -.-> SMTP
+
+```
+```mermaid
+%% "Modèle logique de données (MongoDB, ERD)"
+erDiagram
+  USERS ||--o{ USER_PROFILES : has
+  USERS ||--o{ FOUND_CACHES : logs
+  USERS ||--o{ USER_CHALLENGES : owns
+  USER_CHALLENGES ||--o{ USER_CHALLENGE_TASKS : contains
+  USER_CHALLENGES ||--o{ PROGRESS : has
+  USER_CHALLENGES ||--o{ TARGETS : has
+  CACHES ||--o{ FOUND_CACHES : is_logged
+  CACHES ||--o{ CHALLENGES : may_be
+  CACHES ||--o{ TARGETS : candidate
+  COUNTRIES ||--o{ STATES : has
+
+  USERS {
+    string id
+    string email
+    string username
+    string role
+    boolean email_verified
+  }
+  USER_PROFILES {
+    string id
+    string user_id
+    float lat
+    float lon
+    string coords_text
+    date updated_at
+  }
+  CACHES {
+    string id
+    string gc_code
+    string loc
+    int type_id
+    int size_id
+    string attribute_ids
+    int favorites
+    date placed_at
+  }
+  FOUND_CACHES {
+    string id
+    string user_id
+    string cache_id
+    date found_at
+  }
+  CHALLENGES {
+    string id
+    string cache_id
+    string name
+    string description
+  }
+  USER_CHALLENGES {
+    string id
+    string user_id
+    string challenge_id
+    string status
+    string notes
+    date created_at
+    date updated_at
+  }
+  USER_CHALLENGE_TASKS {
+    string id
+    string user_challenge_id
+    int order
+    string title
+    string ast_expression
+    string constraints
+    string status
+  }
+  PROGRESS {
+    string id
+    string user_challenge_id
+    date checked_at
+    string aggregate
+    string tasks
+    date estimated_completion_at
+  }
+  TARGETS {
+    string id
+    string user_challenge_id
+    string cache_id
+    float score
+    string matched_task_ids
+    float distance_km
+  }
+  COUNTRIES {
+    string id
+    int country_id
+    string name
+  }
+  STATES {
+    string id
+    int state_id
+    string name
+    int country_id
+  }
+
+```
+```mermaid
+%% "Diagramme de séquence : import GPX et synchronisation"
+sequenceDiagram
+  autonumber
+  participant U as "Utilisateur"
+  participant FE as "Frontend (Vue)"
+  participant BE as "API (FastAPI)"
+  participant S1 as "Service GPX Importer"
+  participant S2 as "Service Challenge AutoCreate"
+  participant S3 as "Service UserChallenges"
+  participant S4 as "Service Progress"
+  participant DB as "MongoDB"
+
+  U->>FE: "Upload GPX/ZIP (found=? )"
+  FE->>BE: "POST /caches/upload-gpx"
+  BE->>S1: "Parser GPX, upsert CACHES (+ FOUND_CACHES si found)"
+  S1->>DB: "write CACHES/FOUND_CACHES"
+  BE->>S2: "Créer/MAJ CHALLENGES à partir des caches ayant l'attribut challenge"
+  S2->>DB: "upsert CHALLENGES"
+  BE->>S3: "POST /my/challenges/sync (crée UC manquants)"
+  S3->>DB: "upsert USER_CHALLENGES (status=pending)"
+  BE->>S4: "POST /my/challenges/new/progress (init)"
+  S4->>DB: "insert PROGRESS (premiers snapshots)"
+  BE-->>FE: "Résumé d’import + stats"
+
+```
+```mermaid
+%% "Diagramme de séquence : Consultation d’un challenge et projection"
+sequenceDiagram
+  autonumber
+  participant U as "Utilisateur"
+  participant FE as "Frontend (Vue)"
+  participant BE as "API (FastAPI)"
+  participant S4 as "Service Progress"
+  participant DB as "MongoDB"
+
+  U->>FE: "Ouvre un UserChallenge (uc_id)"
+  FE->>BE: "GET /my/challenges/{uc_id}"
+  BE->>DB: "read USER_CHALLENGES (+CHALLENGES/CACHES)"
+  BE-->>FE: "Détail UC (+ snapshot light)"
+  FE->>BE: "GET /my/challenges/{uc_id}/progress"
+  BE->>DB: "read PROGRESS (latest + history)"
+  BE-->>FE: "Snapshot courant + mini-historique"
+  FE->>BE: "POST /my/challenges/{uc_id}/progress/evaluate (si demandé)"
+  BE->>S4: "Calcul progression (match tasks ↔ caches)"
+  S4->>DB: "insert PROGRESS (nouveau snapshot)"
+  BE-->>FE: "Snapshot calculé (avec estimation de fin)"
+  

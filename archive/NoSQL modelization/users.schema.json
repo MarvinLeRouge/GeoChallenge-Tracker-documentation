@@ -1,0 +1,25 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "User",
+    "type": "object",
+    "properties": {
+      "username": { "type": "string" },
+      "email": { "type": "string", "format": "email" },
+      "password_hash": { "type": "string" },
+      "role": { "type": "string", "enum": ["user", "admin"] },
+      "is_active": { "type": "boolean" },
+      "is_verified": { "type": "boolean" },
+      "created_at": { "type": "string", "format": "date-time" },
+      "updated_at": { "type": "string", "format": "date-time" },
+      "preferences": {
+        "type": "object",
+        "properties": {
+          "language": { "type": "string" },
+          "dark_mode": { "type": "boolean" }
+        },
+        "required": ["language"]
+      }
+    },
+    "required": ["username", "email", "password_hash", "role", "is_active", "is_verified", "created_at"]
+  }
+  

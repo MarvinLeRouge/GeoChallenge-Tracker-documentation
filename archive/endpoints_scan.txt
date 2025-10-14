@@ -1,0 +1,23 @@
+./app/api/routes/my_challenge_tasks.py:6:from fastapi import APIRouter, Depends, HTTPException, Path, Body, status
+./app/api/routes/my_challenge_tasks.py:16:router = APIRouter(
+./app/api/routes/caches_elevation.py:8:from fastapi import APIRouter, Depends, Query, HTTPException, status
+./app/api/routes/caches_elevation.py:14:router = APIRouter(
+./app/api/routes/my_challenge_progress.py:8:from fastapi import APIRouter, Depends, HTTPException, Query, Path, Body, status
+./app/api/routes/my_challenge_progress.py:20:router = APIRouter(
+./app/api/routes/auth.py:12:from fastapi import APIRouter, Depends, HTTPException, Body, Query, Request, status, BackgroundTasks
+./app/api/routes/auth.py:40:router = APIRouter(prefix="/auth", tags=["auth"])
+./app/api/routes/maintenance.py:7:from fastapi import APIRouter, Depends, HTTPException, Query, status
+./app/api/routes/maintenance.py:16:router = APIRouter(
+./app/api/routes/challenges.py:7:from fastapi import APIRouter, Body, Depends, HTTPException, status
+./app/api/routes/challenges.py:16:router = APIRouter(
+./app/api/routes/caches.py:12:from fastapi import APIRouter, UploadFile, File, HTTPException, status, Depends, Query, Body, Path
+./app/api/routes/caches.py:25:router = APIRouter(
+./app/api/routes/base.py:4:from fastapi import APIRouter
+./app/api/routes/base.py:6:router = APIRouter()
+./app/api/routes/my_challenge_targets.py:8:from fastapi import APIRouter, Depends, HTTPException, Query, Path, status
+./app/api/routes/my_challenge_targets.py:23:router = APIRouter(
+./app/api/routes/my_profile.py:4:from fastapi import APIRouter, Depends, HTTPException, Body, status
+./app/api/routes/my_profile.py:12:router = APIRouter(
+./app/api/routes/my_challenges.py:7:from fastapi import APIRouter, Depends, HTTPException, Query, Path, Body, status
+./app/api/routes/my_challenges.py:29:router = APIRouter(
+./main.py:15:@app.get("/ping")

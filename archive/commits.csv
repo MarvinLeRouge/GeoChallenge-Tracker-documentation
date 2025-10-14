@@ -1,0 +1,124 @@
+9008d93;Jean Ceugniet;2025-08-30;feat(router): global auth guard (deny-by-default) + publics par préfixe
+b8b83ef;Jean Ceugniet;2025-08-30;feat(auth): login/register, refresh tokens, guards + toasts
+c1096fc;Jean Ceugniet;2025-08-30;fix(auth): envoi email de vérification via BackgroundTasks + corrections
+b617ed0;Jean Ceugniet;2025-08-29;feat(ui): Flowbite + icônes + menu accordéon + logo SVG
+003d484;Jean Ceugniet;2025-08-29;chore(auth): initialize auth feature branch (scaffold)
+1dab60a;Jean Ceugniet;2025-08-28;feat(appshell): base layout + router + home dummy
+3d20e27;Jean Ceugniet;2025-08-28;build(frontend): Docker dev env (Vite+HMR) + API proxy + multi-stage Dockerfile
+c1d5dc1;Jean Ceugniet;2025-08-28;feat(progress): ajout des dates de début/fin et estimation de complétion des tâches & challenges
+525acf7;Jean Ceugniet;2025-08-28;feat(maintenance): ajout d’un module dédié et sécurisation globale par rôle admin
+c03cd3d;Jean Ceugniet;2025-08-27;docs(api): documentation inline et en-têtes Swagger sur toute l’API
+1031b0b;Jean Ceugniet;2025-08-26;test(targets): refonte des tests e2e avec auth réelle et nettoyage des anciens scénarios
+d290181;Jean Ceugniet;2025-08-26;feat(targets): implémentation complète des routes et factorisation moteur d’évaluation
+795de4f;Jean Ceugniet;2025-08-25;refactor(user_challenge_tasks): centralize AST normalization and factorize helpers for reuse in progress/targets
+51b21b0;Jean Ceugniet;2025-08-25;feat(progress): improve evaluation flow, status handling and consistency
+8e1ae3c;Jean Ceugniet;2025-08-23;refactor(referentials): centralize referentials cache + code→id resolution
+9915d19;Jean Ceugniet;2025-08-23;fix(user-challenge-tasks): cleanup resolvers and ensure canonical AST
+c48ca59;Jean Ceugniet;2025-08-23;feat(validation): enforce country requirement for state_in rules
+e14e4fd;Jean Ceugniet;2025-08-23;refactor(my-challenges): align referentials and DTOs for functional consistency
+b54e643;Jean Ceugniet;2025-08-22;fix(my_challenge_tasks): align list & put responses with TaskOut DTOs
+cc91f07;Jean Ceugniet;2025-08-22;fix(tasks-validate): return structured ValidationErrorItem for FastAPI response_model
+911d056;Jean Ceugniet;2025-08-22;Code cleanup
+00a3255;Jean Ceugniet;2025-08-22;feat(my_challenges): expose related cache in UserChallenge detail
+c000cfc;Jean Ceugniet;2025-08-22;tests(my_challenges): add full coverage for sync, list, detail, patch & batch
+c8e0775;Jean Ceugniet;2025-08-22;(fix) user_challenge_tasks : recover from partial rollback
+34916df;Jean Ceugniet;2025-08-22;merge(branch): backend/progress → main
+16d0829;Jean Ceugniet;2025-08-22;Merge branch 'backend/user-challenges' into backend/mainmerge(branch): backend/user-challenges → main
+6db6daa;Jean Ceugniet;2025-08-22;feat(challenges): extension de l’AST pour inclure des feuilles d’agrégat
+1b96787;Jean Ceugniet;2025-08-22;feat(progress): support aggregate tasks (sum difficulty, terrain, diff+terr, altitude)
+b57eabe;Jean Ceugniet;2025-08-22;(feat) services/user_challenge_tasks.py Added aggregate tasks possibility : challenge tests based on aggregate properties (typically sum)
+52b30cc;Jean Ceugniet;2025-08-22;(feat) my_challenges : Added batch patch route
+a693252;Jean Ceugniet;2025-08-21;(fix) caches route : all parametered paths after static ones
+1191251;Jean Ceugniet;2025-08-21;Code cleanup
+b3c9f56;Jean Ceugniet;2025-08-21;Merge remote-tracking branch 'refs/remotes/origin/backend/caches' into backend/caches
+7a29ff6;Jean Ceugniet;2025-08-21;feat(elevation): ajout de la récupération automatique des altitudes lors de l’import GPX
+835272d;Jean Ceugniet;2025-08-21;feat(elevation): ajout de la récupération automatique des altitudes lors de l’import GPX
+1c10680;Jean Ceugniet;2025-08-21;Merge branch 'backend/fastapi' into backend/caches
+72728fe;Jean Ceugniet;2025-08-21;Fix upload-gpx return format
+7d9a29e;Jean Ceugniet;2025-08-21;Merge branch 'backend/targets' into backend/tests
+1f5c0f8;Jean Ceugniet;2025-08-21;feat(targets): add targets DTOs and adjust import paths
+daee350;Jean Ceugniet;2025-08-21;tests(targets): add pytest suite for targets service and routes
+e7dfe37;Jean Ceugniet;2025-08-21;feat(targets): add preview endpoints for challenge targets
+8108fa4;Jean Ceugniet;2025-08-20;fastapi : migrer on_event(startup) vers lifespan
+ab4057a;Jean Ceugniet;2025-08-19;test(progress): smoke tests auto-suffisants (admin) + invariants agrégat
+d32cc85;Jean Ceugniet;2025-08-19;progress : suivi de progression + évaluation à l’acceptation
+4963c20;Jean Ceugniet;2025-08-19;Merge branch 'backend/user-challenges' into backend/tests
+9b37b10;Jean Ceugniet;2025-08-19;feat(backend/user-challenges): compléter les rules AST + valider TaskExpression via TypeAdapter
+abf9c98;Jean Ceugniet;2025-08-19;test(user_challenge_tasks): add comprehensive suite (verbose, reorder, delete, invalid refs, grammar errors, or/not)
+5f8a15a;Jean Ceugniet;2025-08-19;Merge branch 'backend/user-challenges' into backend/fastapi
+d94f757;Jean Ceugniet;2025-08-19;test(user-challenge-tasks): pytest verbeux validate→put→list + rendu humain des AST
+096c460;Jean Ceugniet;2025-08-19;test(user-challenge-tasks): pytest verbeux validate→put→list + rendu humain des AST
+520c2ff;Jean Ceugniet;2025-08-19;user-challenge-tasks: routes + service + DTOs (CRUD groupé, validation AST, ordre)
+5707933;Jean Ceugniet;2025-08-18;test(user-challenges): vérifie les compteurs effectifs + transitions + rollback propres
+52086e3;Jean Ceugniet;2025-08-18;user-challenges : Route /my/challenges + logique d’état effectif + DTOs
+d5e8cca;Jean Ceugniet;2025-08-18;test(challenges): ajout des tests d’auto-création des Challenges (attr 71) avec nettoyage différentiel
+4450cdb;Jean Ceugniet;2025-08-18;challenges: auto-create Challenge depuis caches avec l’attribut 71 (is challenge) + endpoint admin + indexes
+583c6fc;Jean Ceugniet;2025-08-17;Merge branch 'backend/tests' into backend/fastapi
+9e94616;Jean Ceugniet;2025-08-17;Merge branch 'backend/caches' into backend/fastapi
+606ffa0;Jean Ceugniet;2025-08-17;Updated tests
+2c50aa1;Jean Ceugniet;2025-08-17;Modify importer for found caches
+59c52ea;Jean Ceugniet;2025-08-17;Auth login modified to login via API or swagger
+29011e0;Jean Ceugniet;2025-08-17;Code cleanup
+b1d7d74;Jean Ceugniet;2025-08-17;Small Depends issue
+fdb240f;Jean Ceugniet;2025-08-17;caches: add geo radius search (loc + 2dsphere); update importer & routes
+38d313c;Jean Ceugniet;2025-08-17;db: idempotent index seeding; case-insensitive uniques on users; partial unique for cache_attributes txt
+9b01dd5;Jean Ceugniet;2025-08-17;Merge branch 'backend/fastapi' into backend/auth
+496f2d2;Jean Ceugniet;2025-08-17;Small corrections on models and seeding indexes .gitignore     adding zip files backend/app/db/seed_indexes.py     partial index on ptentially null field backend/app/models/_shared.py     missing import
+21fc496;Jean Ceugniet;2025-08-17;Merge branch 'backend/tests' into backend/fastapi
+433eed0;Jean Ceugniet;2025-08-17;Merge branch 'backend/caches' into backend/fastapi
+c2427ab;Jean Ceugniet;2025-08-17;Merge branch 'backend/auth' into backend/fastapi
+c94d00e;Jean Ceugniet;2025-08-17;Merge branch 'backend/fastapi' into backend/tests
+fdcab22;Jean Ceugniet;2025-08-17;Merge branch 'backend/fastapi' into backend/caches
+8bef414;Jean Ceugniet;2025-08-17;Rebase verification
+11d56d2;Jean Ceugniet;2025-08-17;Fictitious commit to verify rebase ok
+14cdbf1;Jean Ceugniet;2025-08-17;Models update for consistency
+6f7aced;Jean Ceugniet;2025-08-17;caches: models & services (elevation, GPX import, parser)
+5a73f88;Jean Ceugniet;2025-08-17;api: swagger integration (pydantic schema + oauth token path)
+5cf6b8d;Jean Ceugniet;2025-08-17;auth: add /auth/token route for Swagger
+7d72f7a;Jean Ceugniet;2025-08-16;Ensure all useful indexes are populated at startup
+c750a10;Jean Ceugniet;2025-08-16;Ensure all useful indexes are populated at startup
+d565a71;Jean Ceugniet;2025-08-17;Rebase verification
+10df62b;Jean Ceugniet;2025-08-17;Fictitious commit to verify rebase ok
+5fa842d;Jean Ceugniet;2025-08-17;Models update for consistency
+b8bdbfa;Jean Ceugniet;2025-08-17;caches: models & services (elevation, GPX import, parser)
+fb735c9;Jean Ceugniet;2025-08-17;api: swagger integration (pydantic schema + oauth token path)
+d59419b;Jean Ceugniet;2025-08-17;auth: add /auth/token route for Swagger
+37f111b;Jean Ceugniet;2025-08-16;Ensure all useful indexes are populated at startup
+f4bb40c;Jean Ceugniet;2025-08-16;Ensure all useful indexes are populated at startup
+892a871;Jean Ceugniet;2025-08-16;Total models revision
+1c3715d;Jean Ceugniet;2025-08-15;Seeding modification + name normalization
+e38332e;Jean Ceugniet;2025-08-16;Total models revision
+e6b9ff9;Jean Ceugniet;2025-08-15;Seeding modification + name normalization
+0b92f3f;Jean Ceugniet;2025-08-10;Added route caches/upload-gpx, for caches and found_caches
+aa0ad20;Jean Ceugniet;2025-08-09;Correcting erroneous data model
+b6aabd0;Jean Ceugniet;2025-08-08;Auth : all user authentication routes and related functions (email verification, tokens, password hashing))
+5d7660d;Jean Ceugniet;2025-08-16;Total models revision
+c37d2b5;Jean Ceugniet;2025-08-15;Seeding modification + name normalization
+c421c28;Jean Ceugniet;2025-08-10;Added route caches/upload-gpx, for caches and found_caches
+b05ab94;Jean Ceugniet;2025-08-09;Correcting erroneous data model
+340db2f;Jean Ceugniet;2025-08-08;Tests
+6b10ba3;Jean Ceugniet;2025-08-08;Project configuration + code cleanup
+3efc5bf;Jean Ceugniet;2025-08-16;Total models revision
+ced3a03;Jean Ceugniet;2025-08-15;Seeding modification + name normalization
+281555a;Jean Ceugniet;2025-08-10;Merge pull request #97 from 2024-avril-devops-alt-dist/backend/caches
+1b696f2;Jean Ceugniet;2025-08-10;Added route caches/upload-gpx, for caches and found_caches
+5cec8fe;Jean Ceugniet;2025-08-09;Correcting erroneous data model
+b8edf8a;Jean Ceugniet;2025-08-08;Merge pull request #96 from 2024-avril-devops-alt-dist/backend/auth
+573195d;Jean Ceugniet;2025-08-08;Merge pull request #95 from 2024-avril-devops-alt-dist/backend/tests
+5ac205c;Jean Ceugniet;2025-08-08;Auth : all user authentication routes and related functions (email verification, tokens, password hashing))
+74a0feb;Jean Ceugniet;2025-08-08;Tests
+702a9d9;Jean Ceugniet;2025-08-08;Project configuration + code cleanup
+16e0d9d;Jean Ceugniet;2025-08-07;Merge pull request #94 from 2024-avril-devops-alt-dist/backend/fastapi
+e02c52d;Jean Ceugniet;2025-08-07;Branch backend init
+bc3755d;Jean Ceugniet;2025-08-06;Merge branch 'install' into backend/fastapi
+0105cc7;Jean Ceugniet;2025-08-06;Modified docker compose to share .env between backend and frontend
+a595bd2;Jean Ceugniet;2025-08-06;Merge pull request #93 from 2024-avril-devops-alt-dist/install
+753e96e;Jean Ceugniet;2025-08-05;Better module structure + Seeding user + pytest tests added
+26207d4;Jean Ceugniet;2025-08-02;Folder structure modification + Models
+ac079d1;Jean Ceugniet;2025-08-02;Seeding data .gitignore : avoid putting live data in the repo .gitkeep : preserve folders structure /data/seeding : seeding data
+30c121e;Jean Ceugniet;2025-07-09;Install - Frontend - Ultrabasic vue projet Backend connectivity test
+f9d02d0;Jean Ceugniet;2025-07-09;Install - Frontend - Serveur web
+2ab755f;Jean Ceugniet;2025-07-09;Backend : Added MongoDb connectivity test
+ff106d7;Jean Ceugniet;2025-07-07;Basic README.md
+dc642c7;Jean Ceugniet;2025-07-07;Branch install : first commit
+98174d6;Jean Ceugniet;2025-07-02;Initial commit
