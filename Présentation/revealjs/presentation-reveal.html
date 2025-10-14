@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GeoChallenge Tracker — Soutenance</title>
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/league.css" id="theme" />
+    <style>
+        .reveal section h1,
+        .reveal section h2 {
+            text-transform: none;
+        }
+
+        .reveal .slides {
+            font-size: 30px;
+        }
+
+        .reveal ul {
+            line-height: 1.3;
+        }
+
+        .logo-placeholder {
+            width: 140px;
+            height: 140px;
+            border: 2px dashed #999;
+            border-radius: 12px;
+            display: inline-block;
+            line-height: 140px;
+            text-align: center;
+            color: #999;
+            font-size: 20px;
+        }
+
+        .credits {
+            font-size: 22px;
+            color: #555;
+            margin-top: 1rem;
+        }
+    </style>
+
+    <link rel="stylesheet" href="presentation-reveal.css" />
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="brand-header">
+            <div class="brand-logo"></div>
+            <div class="brand-name">GeoChallenge Tracker</div>
+        </div>
+        <div class="brand-footer"></div>
+        <div class="slides">
+
+            <section>
+                <h1><span class="logo-wrapper"><img class="logo" src="assets/logo-cropped.svg"
+                            alt="" /></span>GeoChallenge
+                    Tracker</h1>
+                <div class="credits">
+                    <div>Jean Ceugniet</div>
+                    <div>Titre Concepteur Développeur d'Applications, 28 octobre 2025</div>
+                </div>
+                <aside class="notes">
+                    Identité produit<br>
+                    Contexte
+                </aside>
+            </section>
+
+            <section>
+                <h2>Présentation entreprise / client</h2>
+                <ul>
+                    <li class="fragment diapo__item">Communauté : <span class="diapo__item__content">géocacheurs</span>
+                    </li>
+                    <li class="fragment diapo__item">Client : <span class="diapo__item__content">passionnés de
+                            challenges</span></li>
+                    <li class="fragment diapo__item">Pool tests : <span class="diapo__item__content">12 testeurs,
+                            profils variés</span></li>
+                </ul>
+                <aside class="notes">
+                    Insister sur le jeu dans le jeu<br>
+                    Expliquer la complexité de suivi : durée et volume
+                </aside>
+            </section>
+
+            <section>
+                <h2>Existant, besoins, contraintes, livrables</h2>
+                <ul>
+                    <li class="fragment diapo__item">Existant : <span class="diapo__item__content">forces,
+                            faiblesses</span></li>
+                    <li class="fragment diapo__item">Besoin : <span class="diapo__item__content">ergonomie,
+                            fonctionnalités, performance</span></li>
+                    <li class="fragment diapo__item">Contraintes : <span class="diapo__item__content">deadline
+                            10/10/2025, mobile-first, limites APIs externes, plateforme de test</span></li>
+                    <li class="fragment diapo__item">Livrables : <span class="diapo__item__content">dossier projet +
+                            annexes, application web, documentation technique</span></li>
+                </ul>
+                <aside class="notes">
+                    Existant : <a href="assets/03/projectgc.png">screenshot ProjectGC</a><br>
+                    Contraintes : importance du respect des limites APIs externes
+                </aside>
+            </section>
+
+            <section>
+                <h2>Gestion de projet</h2>
+                <ul>
+                    <li class="fragment diapo__item">Agile solo : <span class="diapo__item__content">sprints 1 semaine
+                            (x10), MoSCoW, revues</span></li>
+                    <li class="fragment diapo__item">Suivi : <span class="diapo__item__content">GitHub Projects
+                            (kanban), issues, milestones</span></li>
+                    <li class="fragment diapo__item">Stack : <span class="diapo__item__content">Docker, Python 3.11,
+                            FastAPI, MongoDB, Vue.js</span></li>
+                    <li class="fragment diapo__item">Qualité : <span class="diapo__item__content">CI/CD/CC, coverage, P95</span></li>
+                </ul>
+                <aside class="notes">
+                    MoSCoW : Must, Should, Could, Won't<br>
+                    GitHub Projects : screenshots github projects, focaliser sur la différence <a href="assets/04/github-roadmap.png">roadmap</a> / <a href="assets/04/github-kanban.png">kanban</a><br>
+                    Docker : <a href="assets/04/docker-compose.txt">compose multi-services</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Architecture logicielle</h2>
+                <ul>
+                    <li class="fragment diapo__item">3-tiers :<br>
+                        <ul class="diapo__item__content">
+                            <li><img src="assets/logo-vuejs.svg" alt="" >Vue.js</li>
+                            <li><img src="assets/logo-fastapi.svg" alt="" >FastAPI</li>
+                            <li><img src="assets/logo-mongodb.svg" alt="" >MongoDB</li>
+                        </ul>
+                    </li>
+                    <li class="fragment diapo__item">Séparation claire : <span class="diapo__item__content">routes /
+                            services / modèles</span></li>
+                    <li class="fragment diapo__item">Encapsulation des dépendances externes : <span
+                            class="diapo__item__content">altimétrie</span></li>
+                </ul>
+                <aside class="notes">
+                    3-tiers : se préparer aux questions sur le choix de la stack<br>
+                    Séparation : <a href="assets/05/folder.png">structure dossiers</a><br>
+                    Encapsulation : abstraction == possibilité de changement de provider
+                </aside>
+            </section>
+
+            <section>
+                <h2>Maquettes &amp; enchaînement</h2>
+                <ul>
+                    <li class="fragment diapo__item">Screenshots : <span class="diapo__item__content">Accueil / Carte / Liste challenges</span></li>
+                    <li class="fragment diapo__item">Charte : <span class="diapo__item__content">mobile-first, sobre, lisible, performances</span></li>
+                </ul>
+                <aside class="notes">
+                    Screenshots : sobriété graphique assumée, on est sur un outil<br>
+                    Charte : <a href="https://www.figma.com/proto/ba8qCI2QTFiJi3dkZAghaZ/Geocaching?node-id=0-1&t=09PPhu9lbqOrJfQR-1">lien figma direct</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Modèle de données</h2>
+                <ul>
+                    <li class="fragment diapo__item">Diagramme E/A</li>
+                    <li class="fragment diapo__item">Indexes : <span class="diapo__item__content"> requêtes géospatiales
+                            (geoNear, 2d sphere)</span></li>
+                    <li class="fragment diapo__item">Collections clés : <span class="diapo__item__content">caches /
+                            user_challenges / progress</span></li>
+                </ul>
+                <aside class="notes">
+                    Diagramme : <a href="assets/07/mcd.svg">MCD</a> / <a href="assets/07/mpd.svg">MPD</a><br>
+                    Indexes : <a href="assets/07/seed_indexes.png">seed_indexes</a>, expliquer l'importance de l'index 2d sphere<br>
+                    Collections : <a href="assets/07/collection-caches.png">caches</a> / <a href="assets/07/collection-user_challenges.png">user challenges</a> / <a href="assets/07/progress.png">progress</a>. Si on montre des collections dénormalisées, on le dit ouvertement
+                </aside>
+            </section>
+
+            <section>
+                <h2>Cas d’utilisation</h2>
+                <ul>
+                    <li class="fragment diapo__item">Diagramme des cas</li>
+                    <li class="fragment diapo__item">Parcours : <span class="diapo__item__content">importer GPX => gérer
+                            challenges => suivre progression</span></li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/08/diagramme-cas.svg">Diagramme des cas</a><br>
+                    <a href="assets/08/parcours-import.svg">Parcours import GPX</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Séquence — Calcul de progression</h2>
+                <ul>
+                    <li class="fragment diapo__item">Diagramme de séquence (à insérer)</li>
+                    <li class="fragment diapo__item">Évaluation tâches, agrégats, snapshot + séries temporelles</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/09/diagramme-sequence.svg">Diagramme de séquence</a><br>
+                    <a href="assets/09/evaluation-taches.png">Évaluation tâches</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>UI — Carte interactive</h2>
+                <ul>
+                    <li class="fragment diapo__item">Screenshots desktop + mobile</li>
+                    <li class="fragment diapo__item">Composant MapBase.vue : <span class="diapo__item__content">Leaflet,
+                            clustering, tile caching</span></li>
+                    <li class="fragment diapo__item">Performance &amp; green computing</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/10/map-mobile.png">Mobile</a><br>
+                    <a href="assets/10/map-desktop.png">Desktop</a><br>
+                    <a href="assets/10/tile-caching.png">Tile caching</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>UI — Liste challenges</h2>
+                <ul>
+                    <li class="fragment diapo__item">Filtrage, pagination, statuts, barre d’actions</li>
+                    <li class="fragment diapo__item">Composant Vue + Pinia</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/11/challenges-list.png">Liste challenges</a><br>
+                </aside>
+            </section>
+
+            <section>
+                <h2>UI — Détails challenge</h2>
+                <ul>
+                    <li class="fragment diapo__item">Description sanitisée (DOMPurify)</li>
+                    <li class="fragment diapo__item">Notes &amp; override</li>
+                    <li class="fragment diapo__item">Progression agrégée + tâches</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/12/challenge-details.png">Challenge, détails</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Composant métier — Parser GPX</h2>
+                <ul>
+                    <li class="fragment diapo__item">GPXCacheParser.py — multi-namespaces (≥5 standards)</li>
+                    <li class="fragment diapo__item">Extraction : <span class="diapo__item__content">attributs, métadonnées, validation stricte</span></li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/13/gpx-parser.png">Parser GPX</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Composant métier — Moteur AST</h2>
+                <ul>
+                    <li class="fragment diapo__item">Grammaire AST (conditions / agrégats)</li>
+                    <li class="fragment diapo__item">Compilation => requêtes MongoDB (QueryBuilder)</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/14/ast-grammaar.png">Grammaire AST</a><br>
+                    <a href="assets/14/ast-to-query.png">Compilation AST requête</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Accès données — Recherche géospatiale</h2>
+                <ul>
+                    <li class="fragment diapo__item">$geoNear + index 2dsphere</li>
+                    <li class="fragment diapo__item">Pipelines d’agrégation, pagination, projection compacte</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/15/2dsphere.png">Index 2d sphere</a><br>
+                    <a href="assets/15/query-optimization.png">Optimisation géospatiale</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Accès données — Calcul progression</h2>
+                <ul>
+                    <li class="fragment diapo__item">evaluate_progress() : <span class="diapo__item__content">snapshots + séries temporelles</span></li>
+                    <li class="fragment diapo__item">MAJ statuts tasks/challenges</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/16/evaluate_progress.png">evaluate progress</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Autre composant — Provider altimétrie</h2>
+                <ul>
+                    <li class="fragment diapo__item">OpenTopoData : <span class="diapo__item__content">quotas,
+                            rate-limiting, batch intelligent</span></li>
+                    <li class="fragment diapo__item">Tolérance aux erreurs (None localisés), caching</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/17/opentopodata.png">OpenTopo Data</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Sécurité — Authentification</h2>
+                <ul>
+                    <li class="fragment diapo__item">JWT + refresh tokens (rotation)</li>
+                    <li class="fragment diapo__item">Schéma de flow, rôles user/admin</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/18/tokens.png">Tokens</a><br>
+                    <a href="assets/18/flow.svg">Authentication flow</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Sécurité — Protection multicouche</h2>
+                <ul>
+                    <li class="fragment diapo__item">Validation Pydantic stricte</li>
+                    <li class="fragment diapo__item">Sanitisation HTML (XSS), CORS</li>
+                    <li class="fragment diapo__item">Rate limiting (client + OSM), isolation par utilisateur</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/19/pydantic.png">Pydantic</a><br>
+                    <a href="assets/19/sanitization.png">Sanitisation HTML</a><br>
+                    <a href="assets/19/rate-limiting.png">Rate limiting</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Plan de tests</h2>
+                <ul>
+                    <li class="fragment diapo__item">Pyramide : <span class="diapo__item__content">80% unit / 15% integ
+                            / 5% E2E</span></li>
+                    <li class="fragment diapo__item">Outils : <span class="diapo__item__content">Pytest / Vitest / Playwright</span></li>
+                    <li class="fragment diapo__item">Coverage visé : &gt;70%</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/20/pytest.png">Pytest</a><br>
+                    <a href="assets/20/Vitest.png">Vitest</a><br>
+                    <a href="assets/20/playwright.png">Playwright</a><br>
+                    <a href="assets/20/coverage.png">Coverage</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Jeu d’essai</h2>
+                <ul>
+                    <li class="fragment diapo__item">5 fichiers GPX (attendus vs obtenus)</li>
+                    <li class="fragment diapo__item">Validation import, pays/régions/challenges, 413 sur &gt;20Mo</li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/21/jeu-essai.png">Jeu d'essai</a><br>
+                    <a href="assets/21/import.png">Imoprt GPX</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Veille vulnérabilités</h2>
+                <ul>
+                    <li class="fragment diapo__item">CVE : <span class="diapo__item__content">suivi / procédures correctives</span></li>
+                    <li class="fragment diapo__item">Audits sécurité : <span class="diapo__item__content">pip-audit, npm audit</span></li>
+                    <li class="fragment diapo__item">Bonnes pratiques : <span class="diapo__item__content">defense in depth, fail secure</span></li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/22/cve.png">CVE</a><br>
+                    <a href="assets/22/audits.png">Audits</a><br>
+                    <a href="assets/22/bonnes-pratiques.png">Bonnes pratiques</a>                    
+                </aside>
+            </section>
+
+            <section>
+                <h2>Conclusion</h2>
+                <ul>
+                    <li class="fragment diapo__item">Compétences CDA couvertes : <span class="diapo__item__content">3 blocs / 11 compétences</span></li>
+                    <li class="fragment diapo__item">Difficultés &amp; solutions, retours testeurs</li>
+                    <li class="fragment diapo__item">Perspectives : <span class="diapo__item__content">offline,
+                            application native, API Geocaching.com, IA ciblage</span></li>
+                </ul>
+                <aside class="notes">
+                    <a href="assets/23/competences.png">Compétences CDA</a><br>
+                    <a href="assets/23/difficultes.png">Difficultés / Solutions / Retours</a>
+                </aside>
+            </section>
+
+            <section>
+                <h2>Merci / Questions</h2>
+            </section>
+
+        </div>
+    </div>
+    <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+    <script src="https://unpkg.com/reveal.js/plugin/notes/notes.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',     // request #1: movement (slide) instead of fade
+            transitionSpeed: 'default',
+            controls: true,
+            progress: true,
+            center: true,
+            defaultTiming: 87,
+            plugins: [RevealNotes]
+        });;
+    </script>
+</body>
+
+</html>

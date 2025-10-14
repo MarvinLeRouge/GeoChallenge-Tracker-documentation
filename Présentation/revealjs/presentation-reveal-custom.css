@@ -1,0 +1,18 @@
+/* presentation-reveal.css */
+:root {
+    --brand-bg: #fdfdfd;
+    --brand-accent: #1f6feb; /* ton bleu actuel */
+    --brand-text: #1a1a1a;
+  }
+  .reveal {
+    background-color: var(--brand-bg);
+    color: var(--brand-text);
+  }
+  .reveal h1, .reveal h2 {
+    color: var(--brand-accent);
+    font-weight: 600;
+  }
+  .reveal a {
+    color: var(--brand-accent);
+  }
+  
