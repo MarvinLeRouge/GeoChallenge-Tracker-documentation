@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant U as Utilisateur
+    participant F as Frontend
+    participant A as API Caches
+    participant P as Parser GPX
+    participant D as MongoDB
+    participant E as Elevation API
+
+    U->>F: Upload fichier GPX
+    F->>A: POST /caches/upload-gpx
+    A->>P: Parser le fichier
+    P->>P: Extraire namespaces
+    P->>P: Normaliser données
+    P-->>A: Caches extraites
+
+    loop Pour chaque cache
+        A->>D: Upsert cache
+        alt Pas d'élévation
+            A->>E: GET elevation
+            E-->>A: Altitude
+            A->>D: Update elevation
+        end
+    end
+
+    A->>D: Sync challenges
+    A-->>F: 200 {imported: n}
+    F-->>U: Afficher résumé

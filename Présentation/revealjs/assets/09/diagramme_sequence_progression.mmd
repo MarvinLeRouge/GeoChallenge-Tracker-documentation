@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant U as Utilisateur
+    participant F as Frontend
+    participant A as API Progress
+    participant S as ProgressService
+    participant D as MongoDB
+
+    U->>F: Voir progression
+    F->>A: GET /my/challenges/{id}/progress
+    A->>S: evaluate_progress(uc_id)
+
+    S->>D: Get user_challenge
+    S->>D: Get tasks
+    S->>D: Get found_caches
+
+    loop Pour chaque tâche
+        S->>S: Compiler AST → query
+        S->>D: Aggregate matching caches
+        S->>S: Calculer pourcentage
+    end
+
+    S->>S: Calculer overall_percent
+    S->>S: Estimer completion_date
+    S->>D: Sauver snapshot
+
+    S-->>A: ProgressResult
+    A-->>F: 200 {progress, estimation}
+    F->>F: Afficher graphiques
+    F-->>U: Dashboard mis à jour

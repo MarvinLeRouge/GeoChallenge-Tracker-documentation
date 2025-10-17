@@ -14,5 +14,7 @@
   }
   .reveal a {
     color: var(--brand-accent);
+    color: #fff;
+    text-decoration: dashed;
   }
   

@@ -1,0 +1,191 @@
+erDiagram
+    users ||--o{ user_challenges : "user_id"
+    users ||--o{ found_caches : "user_id"
+    users ||--o{ targets : "user_id"
+    
+    caches ||--o{ found_caches : "cache_id"
+    caches ||--o{ challenges : "cache_id"
+    caches ||--o{ targets : "cache_id"
+    caches }o--|| cache_types : "type_id"
+    caches }o--|| cache_sizes : "size_id"
+    caches }o--|| countries : "country_id"
+    caches }o--o| states : "state_id"
+    
+    challenges ||--o{ user_challenges : "challenge_id"
+    
+    user_challenges ||--o{ user_challenge_tasks : "user_challenge_id"
+    user_challenges ||--o{ progress : "user_challenge_id"
+    user_challenges ||--o{ targets : "user_challenge_id"
+    
+    countries ||--o{ states : "country_id"
+    
+    user_challenge_tasks ||--o{ targets : "primary_task_id"
+    
+    users {
+        ObjectId _id PK "unique"
+        string username "unique, index"
+        string email "unique, index"
+        string role "enum:user,admin"
+        bool is_active "default:true"
+        bool is_verified "default:false"
+        Point location "2dsphere index, {type:Point, coordinates:[lon,lat]}"
+        object preferences "{language:string, dark_mode:bool}"
+        ObjectId[] challenges "deprecated, computed from user_challenges"
+        string verification_code
+        ISODate verification_expires_at
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    caches {
+        ObjectId _id PK
+        string GC "unique, index"
+        string title
+        string description_html "HTML blob"
+        string url
+        ObjectId type_id "index, FK→cache_types._id"
+        ObjectId size_id "index, FK→cache_sizes._id"
+        ObjectId country_id "index, FK→countries._id"
+        ObjectId state_id "index, FK→states._id"
+        double lat "decimal degrees"
+        double lon "decimal degrees"
+        Point loc "2dsphere index, {type:Point, coordinates:[lon,lat]}"
+        int elevation "meters"
+        object location_more "free-form: {city, department, ...}"
+        double difficulty "1.0-5.0, index"
+        double terrain "1.0-5.0, index"
+        array attributes "[{attribute_doc_id:ObjectId, is_positive:bool}]"
+        ISODate placed_at "index"
+        string owner
+        int favorites
+        string status "enum:active,disabled,archived"
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    cache_types {
+        ObjectId _id PK
+        string name "index"
+        string code
+        string[] aliases
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    cache_sizes {
+        ObjectId _id PK
+        string name "index"
+        string code
+        int order "sort order"
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    cache_attributes {
+        ObjectId _id PK
+        int cache_attribute_id "unique, global ID"
+        string txt "unique, index, e.g. dogs_allowed"
+        string name "e.g. Dogs allowed"
+        string name_reverse "e.g. No dogs allowed"
+        string[] aliases
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    countries {
+        ObjectId _id PK
+        string name "unique, index"
+        string code "ISO 3166-1 alpha-2"
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    states {
+        ObjectId _id PK
+        string name "compound index (country_id, name)"
+        string code
+        ObjectId country_id "FK→countries._id, compound index"
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    found_caches {
+        ObjectId _id PK
+        ObjectId user_id "compound unique (user_id, cache_id)"
+        ObjectId cache_id "compound unique (user_id, cache_id)"
+        ISODate found_date "date only, index"
+        string notes
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    challenges {
+        ObjectId _id PK
+        ObjectId cache_id "unique, FK→caches._id"
+        string name
+        string description
+        object meta "{avg_days_to_complete:double, avg_caches_involved:double, completions:int, acceptance_rate:double}"
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    user_challenges {
+        ObjectId _id PK
+        ObjectId user_id "compound unique (user_id, challenge_id)"
+        ObjectId challenge_id "compound unique (user_id, challenge_id)"
+        string status "enum:pending,accepted,dismissed,completed, index"
+        string computed_status "enum:pending,accepted,dismissed,completed, calculated"
+        bool manual_override "default:false"
+        string override_reason
+        ISODate overridden_at
+        object logic "AST: {kind:and|or|not, task_ids:ObjectId[]}"
+        object progress "DENORM: {percent:double, tasks_done:int, tasks_total:int, checked_at:ISODate}"
+        string notes
+        ISODate estimated_completion_at
+        ISODate created_at "index"
+        ISODate updated_at
+    }
+    
+    user_challenge_tasks {
+        ObjectId _id PK
+        ObjectId user_challenge_id "compound unique (user_challenge_id, order)"
+        int order "compound unique, sort order"
+        string title "max 200 chars"
+        object expression "AST: {kind:type_in|size_in|..., selectors/rules}"
+        object constraints "{min_count:int, ...}"
+        string status "enum:todo,in_progress,done, index"
+        object metrics "DENORM: {current_count:int, ...} computed values"
+        object progress "DENORM: {percent:double, tasks_done:int, tasks_total:int, checked_at:ISODate}"
+        ISODate start_found_at
+        ISODate completed_at
+        ISODate last_evaluated_at
+        ISODate created_at
+        ISODate updated_at
+    }
+    
+    progress {
+        ObjectId _id PK
+        ObjectId user_challenge_id "compound (user_challenge_id, -checked_at)"
+        ISODate checked_at "compound index DESC, time-series key"
+        object aggregate "DENORM: {percent, tasks_done, tasks_total} calculated from tasks[]"
+        array tasks "[{task_id, status, progress:{percent, tasks_done, tasks_total, checked_at}, metrics:{current_count, min_count}, constraints, aggregate}]"
+        string message
+        string engine_version
+        ISODate created_at "append-only, no updated_at"
+    }
+    
+    targets {
+        ObjectId _id PK
+        ObjectId user_id "index"
+        ObjectId user_challenge_id "compound (user_challenge_id, -score, pinned)"
+        ObjectId cache_id "compound unique (user_challenge_id, cache_id)"
+        ObjectId primary_task_id "FK→user_challenge_tasks._id"
+        ObjectId[] satisfies_task_ids "FK→user_challenge_tasks._id[]"
+        double score "compound index DESC"
+        string[] reasons "human-readable explanations"
+        bool pinned "compound index, user flag"
+        Point loc "DENORM from caches.loc, 2dsphere for geoNear"
+        object diagnostics "{matched:[], subscores:{tasks, urgency, geo}, evaluated_at}"
+        ISODate created_at
+        ISODate updated_at
+    }

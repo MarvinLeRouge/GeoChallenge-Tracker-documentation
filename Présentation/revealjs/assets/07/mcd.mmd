@@ -1,0 +1,164 @@
+erDiagram
+    USER ||--o{ USER_CHALLENGE : "participe"
+    USER ||--o{ FOUND_CACHE : "trouve"
+    USER ||--o{ TARGET : "vise"
+    
+    CACHE ||--o{ FOUND_CACHE : "est trouvée"
+    CACHE ||--|| CHALLENGE : "définit"
+    CACHE ||--o{ TARGET : "correspond"
+    CACHE }o--|| CACHE_TYPE : "classée"
+    CACHE }o--|| CACHE_SIZE : "dimensionnée"
+    CACHE }o--|| COUNTRY : "située"
+    CACHE }o--o| STATE : "située"
+    CACHE }o--o{ CACHE_ATTRIBUTE : "possède"
+    
+    CHALLENGE ||--o{ USER_CHALLENGE : "assigné"
+    
+    USER_CHALLENGE ||--o{ USER_CHALLENGE_TASK : "décomposé"
+    USER_CHALLENGE ||--o{ PROGRESS : "historisé"
+    USER_CHALLENGE ||--o{ TARGET : "génère"
+    
+    COUNTRY ||--o{ STATE : "contient"
+    
+    USER_CHALLENGE_TASK ||--o{ TARGET : "satisfaite"
+    
+    USER {
+        identifiant id
+        texte username
+        email email
+        texte role
+        booleen is_active
+        booleen is_verified
+        coordonnees location
+        structure preferences
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    CACHE {
+        identifiant id
+        code GC
+        texte title
+        texte_riche description_html
+        url url
+        coordonnees position
+        entier elevation
+        decimal difficulty
+        decimal terrain
+        ensemble attributes
+        horodatage placed_at
+        texte owner
+        entier favorites
+        statut status
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    CACHE_TYPE {
+        identifiant id
+        texte name
+        code code
+        liste aliases
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    CACHE_SIZE {
+        identifiant id
+        texte name
+        code code
+        entier order
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    CACHE_ATTRIBUTE {
+        identifiant id
+        entier cache_attribute_id
+        code txt
+        texte name
+        texte name_reverse
+        liste aliases
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    COUNTRY {
+        identifiant id
+        texte name
+        code code
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    STATE {
+        identifiant id
+        texte name
+        code code
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    FOUND_CACHE {
+        identifiant id
+        date found_date
+        texte notes
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    CHALLENGE {
+        identifiant id
+        texte name
+        texte description
+        structure meta
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    USER_CHALLENGE {
+        identifiant id
+        statut status
+        statut computed_status
+        booleen manual_override
+        texte override_reason
+        horodatage overridden_at
+        formule logic
+        texte notes
+        horodatage estimated_completion_at
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    USER_CHALLENGE_TASK {
+        identifiant id
+        entier order
+        texte title
+        arbre_syntaxique expression
+        structure constraints
+        statut status
+        horodatage start_found_at
+        horodatage completed_at
+        horodatage last_evaluated_at
+        horodatage created_at
+        horodatage updated_at
+    }
+    
+    PROGRESS {
+        identifiant id
+        horodatage checked_at
+        texte message
+        texte engine_version
+        horodatage created_at
+    }
+    
+    TARGET {
+        identifiant id
+        decimal score
+        liste reasons
+        booleen pinned
+        coordonnees loc
+        structure diagnostics
+        horodatage created_at
+        horodatage updated_at
+    }

@@ -1,0 +1,51 @@
+graph LR
+    %% Acteurs à gauche
+    User["👤 Utilisateur"]
+    Admin["👨‍💼 Administrateur"]
+    
+    %% Système principal
+    subgraph System["Système GeoChallenge Tracker"]
+        
+        %% Fonctionnalités communes
+        subgraph Common["Fonctionnalités communes"]
+            UC1((Se connecter))
+        end
+        
+        %% Fonctionnalités utilisateur
+        subgraph UserFunc["Fonctionnalités utilisateur"]
+            UC2((S'inscrire))
+            UC3((Importer GPX))
+            UC4((Créer caches))
+            UC6((Voir challenges))
+            UC7((Accepter challenge))
+            UC8((Créer tâches))
+            UC11((Identifier targets))
+            UC12((Afficher carte))
+        end
+        
+        %% Fonctionnalités admin
+        subgraph AdminFunc["Fonctionnalités admin"]
+            UC14((Gérer utilisateurs))
+            UC15((Voir statistiques))
+        end
+    end
+    
+    %% Relations Utilisateur
+    User --- UC1
+    User --- UC2
+    User --- UC3
+    User --- UC6
+    User --- UC11
+    
+    %% Relations Admin
+    Admin --- UC1
+    Admin --- UC14
+    Admin --- UC15
+
+    %% Dépendances
+    UC3 -.->|include| UC4
+    UC7 -.->|extend| UC6
+    UC7 -.->|include| UC8
+    UC11 -.->|include| UC12
+    
+    %% Relations entre cas d'usage

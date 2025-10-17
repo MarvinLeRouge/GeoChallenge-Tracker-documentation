@@ -1,0 +1,23 @@
+erDiagram
+    USERS ||--o{ USER_CHALLENGES : "participe"
+    USERS ||--o{ FOUND_CACHES : "trouve"
+    USERS ||--o{ TARGETS : "vise"
+    
+    CACHES ||--o{ FOUND_CACHES : "est trouvée"
+    CACHES ||--|| CHALLENGES : "définit"
+    CACHES ||--o{ TARGETS : "correspond"
+    CACHES }o--|| CACHE_TYPES : "classée"
+    CACHES }o--|| CACHE_SIZES : "dimensionnée"
+    CACHES }o--|| COUNTRIES : "située"
+    CACHES }o--o| STATE : "située"
+    CACHES }o--o{ CACHE_ATTRIBUTE : "possède"
+    
+    CHALLENGE ||--o{ USER_CHALLENGE : "assigné"
+    
+    USER_CHALLENGE ||--o{ USER_CHALLENGE_TASK : "décomposé"
+    USER_CHALLENGE ||--o{ PROGRESS : "historisé"
+    USER_CHALLENGE ||--o{ TARGET : "génère"
+    
+    COUNTRY ||--o{ STATE : "contient"
+    
+    USER_CHALLENGE_TASK ||--o{ TARGET : "satisfaite"

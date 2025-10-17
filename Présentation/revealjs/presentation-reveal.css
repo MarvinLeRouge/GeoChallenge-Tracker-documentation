@@ -30,6 +30,27 @@
 
 .reveal a {
     color: var(--brand-accent);
+    color: #fff;
+    text-decoration: dotted;
+}
+
+.reveal a:hover,
+.reveal a:focus {
+    color: #fff;
+    text-decoration: underline;
+
+}
+
+.reveal a::after {
+    content: " 🔗";
+    /* ou " 📎" " 🔍" " 📄" selon ton goût */
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+
+.reveal a:hover::after {
+    opacity: 1;
 }
 
 /* Discreet persistent header with logo + project name */
@@ -145,4 +166,118 @@ ul.diapo__item__content img {
     background: #eee;
     padding: .25em .75em;
     border-radius: 1em;
+}
+
+.reveal .slides .popin {
+    pointer-events: all;
+}
+.dialog {
+    width: 100vw;
+    height: 100vh;
+    background-color: #333;
+    background: -webkit-radial-gradient(center, circle cover, rgb(85, 90, 95) 0%, rgb(28, 30, 32) 100%);
+    background-attachment: fixed;     
+    flex-direction: column;
+}
+.dialog__title {
+    margin: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+h3.dialog__title {
+    font-size: var(--r-heading2-size)
+}
+.dialog__content {
+    flex-grow: 1;
+    display: grid;
+    gap: 2rem;
+    justify-content: center;
+    color: var(--r-main-color);
+}
+.dialog img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+.grid_2 {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+}
+.grid_3 {
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+}
+.grid_4 {
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+}
+.grid_5 {
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+}
+.grid_6 {
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+}
+.architecture {
+    color: #fff;
+    gap: 30px;
+    font-family: "Fira Code", monospace;
+    font-size: 0.8em;
+    line-height: 1.3em;
+    grid-template-columns: repeat(6, minmax(100px, 235px));
+}
+
+.docker {
+    border: 3px solid transparent;
+    border-radius: 12px;
+    padding: 0.5rem 0.8rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.docker .title {
+    font-weight: 600;
+    font-size: 1.2em;
+    margin: 1rem 0 0.4rem 0;
+}
+
+.docker code {
+    font-size: 1.4em;
+    line-height: 1.7;
+
+}
+
+/* Conteneurs colorés */
+.frontend {
+    grid-column: 1/3;
+    border-color: #16a34a;
+}
+
+/* vert */
+.backend {
+    grid-column: 3/5;
+    border-color: #2563eb;
+}
+
+/* bleu */
+.db {
+    grid-column: 5/7;
+    border-color: #eab308;
+}
+
+/* jaune */
+.ops {
+    grid-column: 2/4;
+    border-color: #a855f7;
+}
+
+/* violet */
+.global {
+    grid-column: 4/6;
+    border-color: #6b7280;
+}
+
+/* gris */
+
+pre {
+    padding: 0.6rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 0;
 }

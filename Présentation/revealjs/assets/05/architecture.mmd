@@ -1,0 +1,83 @@
+%% GEOCHALLENGE TRACKER - Architecture & Organisation (version simplifiée)
+%% Fichier à convertir : mmdc -i architecture.mmd -o assets/architecture.svg -b transparent
+
+graph LR
+%% ─────────────────────────────
+%% Dossiers (bloc gauche)
+%% ─────────────────────────────
+subgraph DIR["📁 Structure de dossiers"]
+  D1["backend/<br/>└── app<br/>   ├── api<br/>   ├── services<br/>   └── models"]
+  D2["frontend/<br/>└── src<br/>   ├── pages<br/>   └── components"]
+  D3["ops/<br/>└── deploy / nginx"]
+end
+
+%% ─────────────────────────────
+%% Frontend
+%% ─────────────────────────────
+subgraph FE["💻 Frontend"]
+  FE1["Vue.js<br/>Composants / Pages"]
+  FE2["Pinia + Router"]
+end
+
+%% ─────────────────────────────
+%% Backend
+%% ─────────────────────────────
+subgraph BE["🖥️ Backend"]
+  BE1["FastAPI<br/>Routes + Services"]
+  BE2["Pydantic<br/>Validation / Sécurité"]
+end
+
+%% ─────────────────────────────
+%% Base de données
+%% ─────────────────────────────
+subgraph DB["🗄️ MongoDB"]
+  DB1["Collections<br/>caches / challenges"]
+  DB2["userChallenges / tasks"]
+end
+
+%% ─────────────────────────────
+%% Ops
+%% ─────────────────────────────
+subgraph OPS["🛠️ Ops"]
+  OPS1["Docker Compose"]
+  OPS2["Nginx / Reverse Proxy"]
+end
+
+%% ─────────────────────────────
+%% Global
+%% ─────────────────────────────
+subgraph GL["🌐 Global"]
+  GL1["Backups"]
+  GL2["Uploads GPX"]
+end
+
+%% ─────────────────────────────
+%% Relations (simples)
+%% ─────────────────────────────
+D1 --> BE
+D2 --> FE
+D3 --> OPS
+FE1 -->|Appels REST| BE1
+BE1 -->|Requêtes / CRUD| DB1
+OPS1 -->|Conteneurise| FE
+OPS1 -->|Conteneurise| BE
+OPS2 -->|Reverse proxy| FE
+GL1 -.->|Sauvegarde| DB
+GL2 -.->|Données importées| BE2
+
+%% ─────────────────────────────
+%% Styles
+%% ─────────────────────────────
+classDef dir fill:#f3f4f6,stroke:#6b7280,color:#374151;
+classDef frontend fill:#dcfce7,stroke:#16a34a,color:#064e3b;
+classDef backend fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
+classDef db fill:#fef9c3,stroke:#eab308,color:#854d0e;
+classDef ops fill:#fae8ff,stroke:#a855f7,color:#6b21a8;
+classDef global fill:#f3f4f6,stroke:#9ca3af,color:#374151;
+
+class DIR,D1,D2,D3 dir;
+class FE,FE1,FE2 frontend;
+class BE,BE1,BE2 backend;
+class DB,DB1,DB2 db;
+class OPS,OPS1,OPS2 ops;
+class GL,GL1,GL2 global;
